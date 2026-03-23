@@ -1,0 +1,70 @@
+﻿<header class="section nav">
+  <div class="logo" routerLink="/">
+    <img src="img/logo.webp" alt="Zabby">
+  </div>
+
+  <div class="nav-search">
+    <span class="search-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </span>
+    <input class="search-input text-[15px]" placeholder="Search for Mobile shop, Bakery, Electrician" (focus)="showSuggestion = true" (blur)="showSuggestion = false"/>
+
+    <div *ngIf="showSuggestion" class="autocomplete">
+      <div class="autocomplete-item">
+        <span class="item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 21V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v14"></path>
+            <path d="M9 21V9h6v12"></path>
+          </svg>
+        </span>
+        <span class="item-title">Shoe Store</span>
+      </div>
+
+      <div class="autocomplete-item">
+        <span class="item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 21s-6-4.35-6-10a6 6 0 0 1 12 0c0 5.65-6 10-6 10z"></path>
+            <circle cx="12" cy="11" r="2"></circle>
+          </svg>
+        </span>
+        <span class="item-title">Sharma Shoes</span>
+        <span class="item-distance">1.6 KM</span>
+      </div>
+
+      <div class="autocomplete-item active">
+        <span class="item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 12h16"></path>
+            <path d="M14 6h6"></path>
+            <path d="M14 18h6"></path>
+          </svg>
+        </span>
+        <span class="item-title">Shoe Repair</span>
+      </div>
+
+      <div class="autocomplete-item">
+        <span class="item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 21s-6-4.35-6-10a6 6 0 0 1 12 0c0 5.65-6 10-6 10z"></path>
+            <circle cx="12" cy="11" r="2"></circle>
+          </svg>
+        </span>
+        <span class="item-title">City Shoe Store</span>
+        <span class="item-distance">1.2 KM</span>
+      </div>
+
+      <div class="autocomplete-footer">
+        See all results for 'Sho'
+        <span class="footer-arrow">&gt;</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile">
+    <img class="profile-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=120&auto=format&fit=crop" alt="Profile" />
+    <span>My Profile</span>
+  </div>
+</header>
