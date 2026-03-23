@@ -53,14 +53,21 @@
   <div *ngIf="!isLoading" class="space-y-8">
     <!-- Gallery -->
     <div class="grid grid-cols-12 gap-1">
-      <img class="h-44 sm:h-52 lg:h-56 w-full rounded-2xl object-cover col-span-12 md:col-span-5" src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?q=80&w=1400&auto=format&fit=crop" alt="Shop" />
-      <img class="h-44 sm:h-52 lg:h-56 w-full rounded-2xl object-cover col-span-12 md:col-span-5" src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1400&auto=format&fit=crop" alt="Shop" />
+      <img class="h-44 sm:h-52 lg:h-56 w-full rounded-2xl object-cover col-span-12 md:col-span-5"
+        src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?q=80&w=1400&auto=format&fit=crop"
+        alt="Shop" />
+      <img class="h-44 sm:h-52 lg:h-56 w-full rounded-2xl object-cover col-span-12 md:col-span-5"
+        src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=1400&auto=format&fit=crop" alt="Shop" />
       <div class="col-span-12 md:col-span-2 grid grid-rows-2 gap-1">
         <div class="relative">
-          <img class="h-44 sm:h-52 lg:h-[108px] w-full rounded-2xl object-cover" src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=80&w=900&auto=format&fit=crop" alt="Add" />
+          <img class="h-44 sm:h-52 lg:h-[108px] w-full rounded-2xl object-cover"
+            src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=80&w=900&auto=format&fit=crop"
+            alt="Add" />
         </div>
-            <div class="relative">
-          <img class="h-44 sm:h-52 lg:h-[108px] w-full rounded-2xl object-cover" src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=900&auto=format&fit=crop" alt="More" />
+        <div class="relative">
+          <img class="h-44 sm:h-52 lg:h-[108px] w-full rounded-2xl object-cover"
+            src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=900&auto=format&fit=crop"
+            alt="More" />
           <div class="absolute inset-0 rounded-2xl bg-black/40 flex items-center justify-center">
             <div class="text-white text-center font-semibold leading-tight">
               <div class="text-lg">+32</div>
@@ -80,52 +87,85 @@
         <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">Open Now</span>
         <span class="inline-flex items-center gap-1 text-gray-600">
           <svg class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M5.05 7.05a6.5 6.5 0 1 1 9.19 9.19L10 19.5l-4.24-3.26A6.48 6.48 0 0 1 5.05 7.05zm4.95 5.2a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z" clip-rule="evenodd" />
+            <path fill-rule="evenodd"
+              d="M5.05 7.05a6.5 6.5 0 1 1 9.19 9.19L10 19.5l-4.24-3.26A6.48 6.48 0 0 1 5.05 7.05zm4.95 5.2a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z"
+              clip-rule="evenodd" />
           </svg>
           1.6 km away
         </span>
       </div>
 
       <div class="flex flex-wrap gap-2">
-        <span class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+        <span
+          class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
           Listed by Zabby
         </span>
-        <span class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-          <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 1 0 8 8 8 8 0 0 0-8-8zm-1 12-3-3 1.4-1.4L9 11.2l4.6-4.6L15 8z"/></svg>
+        <span
+          class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+          <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 2a8 8 0 1 0 8 8 8 8 0 0 0-8-8zm-1 12-3-3 1.4-1.4L9 11.2l4.6-4.6L15 8z" />
+          </svg>
           Claimed
         </span>
-        <span class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-          <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2 3 5v6c0 5 7 7 7 7s7-2 7-7V5l-7-3z"/></svg>
+        <span
+          class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+            <path fill="currentColor"
+              d="m8.6 22.5l-1.9-3.2l-3.6-.8l.35-3.7L1 12l2.45-2.8l-.35-3.7l3.6-.8l1.9-3.2L12 2.95l3.4-1.45l1.9 3.2l3.6.8l-.35 3.7L23 12l-2.45 2.8l.35 3.7l-3.6.8l-1.9 3.2l-3.4-1.45zm2.35-6.95L16.6 9.9l-1.4-1.45l-4.25 4.25l-2.15-2.1L7.4 12z" />
+          </svg>
           Verified
         </span>
-        <span class="inline-flex items-center gap-1 rounded-full bg-yellow-100 px-3 py-1 text-xs font-semibold text-yellow-800">
-          <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2 3 5v6c0 5 7 7 7 7s7-2 7-7V5l-7-3z"/></svg>
+        <span
+          class="inline-flex items-center gap-1 rounded-full bg-gradient-to-b from-[#FFCF31] via-[#FFECAD] to-[#FFCF31] px-3 py-1 text-xs font-semibold text-[#7A5A00] shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="m8 12l3 3l5-7M4 11.252c0 7.687 6.918 10.387 7.887 10.728q.113.04.226 0C13.084 21.65 20 19.018 20 11.253V4.304a.4.4 0 0 0-.303-.389l-7.6-1.903a.4.4 0 0 0-.194 0l-7.6 1.903A.4.4 0 0 0 4 4.304z" />
+          </svg>
           Trusted
         </span>
       </div>
 
       <div class="space-y-2 text-sm text-gray-600">
         <div class="flex items-start gap-2">
-          <svg class="h-4 w-4 text-primary mt-0.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 7.05a6.5 6.5 0 1 1 9.19 9.19L10 19.5l-4.24-3.26A6.48 6.48 0 0 1 5.05 7.05zm4.95 5.2a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z" clip-rule="evenodd" /></svg>
-          <p>Shop no. 1 usman patel complex haroon colony near choice bakery pakiza road Khajrana Indore 452016 Madhya Pradesh</p>
+          <svg class="h-4 w-4 text-primary mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M5.05 7.05a6.5 6.5 0 1 1 9.19 9.19L10 19.5l-4.24-3.26A6.48 6.48 0 0 1 5.05 7.05zm4.95 5.2a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z"
+              clip-rule="evenodd" />
+          </svg>
+          <p>Shop no. 1 usman patel complex haroon colony near choice bakery pakiza road Khajrana Indore 452016 Madhya
+            Pradesh</p>
         </div>
         <div class="flex items-center gap-2">
-          <svg class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 1 0 8 8 8 8 0 0 0-8-8zm1 11H9V5h2z"/></svg>
+          <svg class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 2a8 8 0 1 0 8 8 8 8 0 0 0-8-8zm1 11H9V5h2z" />
+          </svg>
           <p>Near Usmaniya Masjid</p>
         </div>
       </div>
 
       <div class="flex flex-wrap gap-3">
-        <button class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white shadow">
-          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3.5A1.5 1.5 0 0 1 3.5 2h2A1.5 1.5 0 0 1 7 3.5v1A1.5 1.5 0 0 1 5.5 6H5l.2 1.4a2 2 0 0 0 1.6 1.7l2.7.5a2 2 0 0 1 1.6 1.6l.5 2.7a2 2 0 0 0 1.7 1.6L14 15v-.5A1.5 1.5 0 0 1 15.5 13h1a1.5 1.5 0 0 1 1.5 1.5v2A1.5 1.5 0 0 1 16.5 18h-1C8.6 18 3 12.4 3 5.5v-1z"/></svg>
+        <button
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white shadow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+            <path fill="currentColor"
+              d="M19.95 21q-3.125 0-6.175-1.362t-5.55-3.863t-3.862-5.55T3 4.05q0-.45.3-.75t.75-.3H8.1q.35 0 .625.238t.325.562l.65 3.5q.05.4-.025.675T9.4 8.45L6.975 10.9q.5.925 1.187 1.787t1.513 1.663q.775.775 1.625 1.438T13.1 17l2.35-2.35q.225-.225.588-.337t.712-.063l3.45.7q.35.1.575.363T21 15.9v4.05q0 .45-.3.75t-.75.3" />
+          </svg>
           Call
         </button>
-        <button class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-6 py-2.5 text-sm font-semibold text-primary shadow">
-          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M3.3 10.3a1 1 0 0 1 0-1.4l11-11a1 1 0 0 1 1.7.6l.7 4.8a1 1 0 0 1-.6 1l-5.4 2.3 2.3 5.4a1 1 0 0 1-1 1.4l-4.8-.7a1 1 0 0 1-.6-1.7l11-11a1 1 0 0 1-1.4 0l-11 11z"/></svg>
+        <button
+          class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-6 py-2.5 text-sm font-semibold text-primary shadow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 1792 1792">
+            <path fill="currentColor"
+              d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45q-14 8-31 8q-11 0-24-5l-453-185l-242 295q-18 23-49 23q-13 0-22-4q-19-7-30.5-23.5T640 1728v-349l864-1059l-1069 925l-395-162q-37-14-40-55q-2-40 32-59L1696 9q15-9 32-9q20 0 36 11" />
+          </svg>
           Directions
         </button>
-        <button class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-6 py-2.5 text-sm font-semibold text-primary shadow">
-          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M15 8a3 3 0 1 0-2.83-4H12a3 3 0 0 0 0 6 2.99 2.99 0 0 0 3-2zM5 12a3 3 0 1 0 2.83 4H8a3 3 0 0 0 0-6 2.99 2.99 0 0 0-3 2zm10 0a3 3 0 1 0 2.83 4H18a3 3 0 0 0 0-6 2.99 2.99 0 0 0-3 2z"/></svg>
+        <button
+          class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-6 py-2.5 text-sm font-semibold text-primary shadow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 24 24">
+            <path fill="currentColor"
+              d="M10.25 3a.75.75 0 0 1 0 1.5h-3.5A2.25 2.25 0 0 0 4.5 6.75v10.5l.012.23A2.25 2.25 0 0 0 6.75 19.5h10.5a2.25 2.25 0 0 0 2.25-2.25v-2a.75.75 0 0 1 1.5 0v2A3.75 3.75 0 0 1 17.25 21H6.75a3.75 3.75 0 0 1-3.745-3.557L3 17.25V6.75A3.75 3.75 0 0 1 6.75 3zm4.687-.932a.75.75 0 0 1 .801.113l7 6a.75.75 0 0 1 .032 1.109l-7 6.75a.75.75 0 0 1-1.27-.54v-2.976c-1.014.064-1.97.273-2.94.769c-1.136.581-2.344 1.581-3.689 3.303l-.271.354a.75.75 0 0 1-1.35-.45c0-2.857.687-5.59 2.168-7.628c1.376-1.893 3.41-3.147 6.082-3.344V2.75l.008-.109a.75.75 0 0 1 .429-.573" />
+          </svg>
           Share
         </button>
       </div>
@@ -135,7 +175,9 @@
     <div class="space-y-3">
       <h2 class="text-lg font-semibold text-gray-900">What they sell</h2>
       <div class="flex flex-wrap gap-2">
-        <span *ngFor="let item of products" class="rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs font-semibold text-gray-700">{{ item }}</span>
+        <span *ngFor="let item of products"
+          class="rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs font-semibold text-gray-700">{{ item
+          }}</span>
       </div>
     </div>
 
@@ -155,10 +197,13 @@
 
     <!-- Claim Info -->
     <div class="border-t border-gray-200 pt-4 text-sm text-gray-500 space-y-3">
-      <p>This business listing is based on publicly available information. If you are the owner, you can claim this listing.</p>
+      <p>This business listing is based on publicly available information. If you are the owner, you can claim this
+        listing.</p>
       <div class="flex flex-wrap gap-3">
         <button class="rounded-full bg-primary px-6 py-2 text-sm font-semibold text-white">Claim this Business</button>
-        <button class="rounded-full border border-gray-300 bg-white px-6 py-2 text-sm font-semibold text-gray-600">Report incorrect information</button>
+        <button
+          class="rounded-full border border-gray-300 bg-white px-6 py-2 text-sm font-semibold text-gray-600">Report
+          incorrect information</button>
       </div>
     </div>
 
@@ -166,14 +211,20 @@
     <div class="space-y-4">
       <h2 class="text-lg font-semibold text-gray-900">Related Business</h2>
       <div class="space-y-4">
-        <div *ngFor="let related of relatedBusinesses" class="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
+        <div *ngFor="let related of relatedBusinesses"
+          class="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
           <div class="flex flex-col gap-4 md:flex-row md:items-center">
-            <img class="h-24 w-full shrink-0 rounded-xl object-cover md:h-24 md:w-36" [src]="related.imageUrl" [alt]="related.name" />
+            <img class="h-24 w-full shrink-0 rounded-xl object-cover md:h-24 md:w-36" [src]="related.imageUrl"
+              [alt]="related.name" />
             <div class="flex-1">
               <h3 class="text-lg font-semibold text-gray-900">{{ related.name }}</h3>
               <p class="mt-1 text-sm text-gray-500">Electronic and Appliance</p>
               <div class="mt-2 flex items-center gap-2 text-sm text-gray-600">
-                <svg class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 7.05a6.5 6.5 0 1 1 9.19 9.19L10 19.5l-4.24-3.26A6.48 6.48 0 0 1 5.05 7.05zm4.95 5.2a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z" clip-rule="evenodd" /></svg>
+                <svg class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M5.05 7.05a6.5 6.5 0 1 1 9.19 9.19L10 19.5l-4.24-3.26A6.48 6.48 0 0 1 5.05 7.05zm4.95 5.2a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z"
+                    clip-rule="evenodd" />
+                </svg>
                 <span>Vijay Nagar | 1.6 km away</span>
               </div>
               <div class="mt-3 flex flex-wrap items-center gap-2">
@@ -183,8 +234,22 @@
               </div>
             </div>
             <div class="flex w-full flex-row gap-3 md:w-auto">
-              <button class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow">Call</button>
-              <button class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-primary shadow">Directions</button>
+              <button
+                class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                  <path fill="currentColor"
+                    d="M19.95 21q-3.125 0-6.175-1.362t-5.55-3.863t-3.862-5.55T3 4.05q0-.45.3-.75t.75-.3H8.1q.35 0 .625.238t.325.562l.65 3.5q.05.4-.025.675T9.4 8.45L6.975 10.9q.5.925 1.187 1.787t1.513 1.663q.775.775 1.625 1.438T13.1 17l2.35-2.35q.225-.225.588-.337t.712-.063l3.45.7q.35.1.575.363T21 15.9v4.05q0 .45-.3.75t-.75.3" />
+                </svg>
+                Call
+              </button>
+              <button
+                class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-primary shadow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 1792 1792">
+                  <path fill="currentColor"
+                    d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45q-14 8-31 8q-11 0-24-5l-453-185l-242 295q-18 23-49 23q-13 0-22-4q-19-7-30.5-23.5T640 1728v-349l864-1059l-1069 925l-395-162q-37-14-40-55q-2-40 32-59L1696 9q15-9 32-9q20 0 36 11" />
+                </svg>
+                Directions
+              </button>
             </div>
           </div>
         </div>

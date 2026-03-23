@@ -10,7 +10,6 @@ export class TransferStateService {
 
     get<T>(key: string) {
         const stateKey = makeStateKey<T>(key);
-
         if (this.transferState.hasKey(stateKey)) {
             return this.transferState.get(stateKey, null as any);
         }

@@ -1,12 +1,17 @@
 ﻿<!-- Banner -->
 <section class="mx-auto max-w-7xl px-4 sm:px-6">
-  <div class="relative overflow-hidden rounded-2xl border border-[#E5E7EB] bg-gradient-to-r from-[#4F8A4B] via-[#5AA95A] to-[#3E7A3E] px-6 py-8 sm:px-10 sm:py-10">
+  <div
+    class="relative overflow-hidden rounded-2xl border border-[#E5E7EB] bg-gradient-to-r from-[#4F8A4B] via-[#5AA95A] to-[#3E7A3E] px-6 py-8 sm:px-10 sm:py-10">
     <div class="relative z-10 max-w-xl">
       <h1 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">Paan corner</h1>
       <p class="mt-2 text-lg text-white/90">Your favourite paan shop is now online</p>
-      <button class="mt-5 inline-flex items-center rounded-lg bg-white px-4 py-2 text-sm font-semibold text-[#2D7C2D] shadow">Shop Now</button>
+      <button
+        class="mt-5 inline-flex items-center rounded-lg bg-white px-4 py-2 text-sm font-semibold text-[#2D7C2D] shadow">Shop
+        Now</button>
     </div>
-    <div class="pointer-events-none absolute right-0 top-0 h-full w-[48%] bg-[url('https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?q=80&w=1400&auto=format&fit=crop')] bg-cover bg-right opacity-90"></div>
+    <div
+      class="pointer-events-none absolute right-0 top-0 h-full w-[48%] bg-[url('https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?q=80&w=1400&auto=format&fit=crop')] bg-cover bg-right opacity-90">
+    </div>
   </div>
 </section>
 
@@ -18,19 +23,19 @@
     <div class="relative">
       <button
         class="flex items-center gap-2 rounded-full border border-blue-300 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm"
-        (click)="toggleDropdown('area', $event)"
-      >
+        (click)="toggleDropdown('area', $event)">
         <span class="text-gray-500">Area:</span>
         <span class="text-blue-700 font-medium">Vijay Nagar</span>
-        <svg class="h-4 w-4 text-gray-400 transition-transform" [class.rotate-180]="openDropdown === 'area'" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z" clip-rule="evenodd" />
+        <svg class="h-4 w-4 text-gray-400 transition-transform" [class.rotate-180]="openDropdown === 'area'"
+          viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd"
+            d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z"
+            clip-rule="evenodd" />
         </svg>
       </button>
-      <div
-        *ngIf="openDropdown === 'area'"
+      <div *ngIf="openDropdown === 'area'"
         class="absolute left-0 top-full z-10 mt-2 w-56 rounded-xl border border-gray-200 bg-white p-2 shadow-lg"
-        (click)="$event.stopPropagation()"
-      >
+        (click)="$event.stopPropagation()">
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Vijay Nagar</button>
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Scheme 54</button>
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Palasia</button>
@@ -40,18 +45,18 @@
     <div class="relative">
       <button
         class="flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm"
-        (click)="toggleDropdown('type', $event)"
-      >
+        (click)="toggleDropdown('type', $event)">
         <span>Wholesale</span>
-        <svg class="h-4 w-4 text-gray-400 transition-transform" [class.rotate-180]="openDropdown === 'type'" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z" clip-rule="evenodd" />
+        <svg class="h-4 w-4 text-gray-400 transition-transform" [class.rotate-180]="openDropdown === 'type'"
+          viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd"
+            d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z"
+            clip-rule="evenodd" />
         </svg>
       </button>
-      <div
-        *ngIf="openDropdown === 'type'"
+      <div *ngIf="openDropdown === 'type'"
         class="absolute left-0 top-full z-10 mt-2 w-48 rounded-xl border border-gray-200 bg-white p-2 shadow-lg"
-        (click)="$event.stopPropagation()"
-      >
+        (click)="$event.stopPropagation()">
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Wholesale</button>
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Retail</button>
       </div>
@@ -60,18 +65,18 @@
     <div class="relative">
       <button
         class="flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm"
-        (click)="toggleDropdown('open', $event)"
-      >
+        (click)="toggleDropdown('open', $event)">
         <span>Open Now</span>
-        <svg class="h-4 w-4 text-gray-400 transition-transform" [class.rotate-180]="openDropdown === 'open'" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z" clip-rule="evenodd" />
+        <svg class="h-4 w-4 text-gray-400 transition-transform" [class.rotate-180]="openDropdown === 'open'"
+          viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd"
+            d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z"
+            clip-rule="evenodd" />
         </svg>
       </button>
-      <div
-        *ngIf="openDropdown === 'open'"
+      <div *ngIf="openDropdown === 'open'"
         class="absolute left-0 top-full z-10 mt-2 w-44 rounded-xl border border-gray-200 bg-white p-2 shadow-lg"
-        (click)="$event.stopPropagation()"
-      >
+        (click)="$event.stopPropagation()">
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Open Now</button>
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Open Today</button>
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">All</button>
@@ -81,18 +86,18 @@
     <div class="relative">
       <button
         class="flex items-center gap-2 rounded-full border border-blue-200 bg-primary px-4 py-2 text-sm text-white shadow-sm"
-        (click)="toggleDropdown('verified', $event)"
-      >
+        (click)="toggleDropdown('verified', $event)">
         <span>Verified</span>
-        <svg class="h-4 w-4 text-white/90 transition-transform" [class.rotate-180]="openDropdown === 'verified'" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z" clip-rule="evenodd" />
+        <svg class="h-4 w-4 text-white/90 transition-transform" [class.rotate-180]="openDropdown === 'verified'"
+          viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd"
+            d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z"
+            clip-rule="evenodd" />
         </svg>
       </button>
-      <div
-        *ngIf="openDropdown === 'verified'"
+      <div *ngIf="openDropdown === 'verified'"
         class="absolute left-0 top-full z-10 mt-2 w-44 rounded-xl border border-gray-200 bg-white p-2 shadow-lg"
-        (click)="$event.stopPropagation()"
-      >
+        (click)="$event.stopPropagation()">
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Verified</button>
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Trusted</button>
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">All</button>
@@ -106,11 +111,9 @@
   <!-- Card 1 -->
   <div class="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
     <div class="flex flex-col gap-4 md:flex-row md:items-center">
-      <img
-        class="h-28 w-full shrink-0 rounded-xl object-cover md:h-32 md:w-48"
+      <img class="h-28 w-full shrink-0 rounded-xl object-cover md:h-32 md:w-48"
         src="https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=900&auto=format&fit=crop"
-        alt="Hidayah Mobile and accessories"
-      />
+        alt="Hidayah Mobile and accessories" />
 
       <div class="flex-1">
         <h3 class="text-lg font-semibold text-gray-900">Hidayah Mobile and accessories</h3>
@@ -118,28 +121,46 @@
 
         <div class="mt-2 flex items-center gap-2 text-sm text-gray-600">
           <svg class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M5.05 7.05a6.5 6.5 0 1 1 9.19 9.19L10 19.5l-4.24-3.26A6.48 6.48 0 0 1 5.05 7.05zm4.95 5.2a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z" clip-rule="evenodd" />
+            <path fill-rule="evenodd"
+              d="M5.05 7.05a6.5 6.5 0 1 1 9.19 9.19L10 19.5l-4.24-3.26A6.48 6.48 0 0 1 5.05 7.05zm4.95 5.2a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z"
+              clip-rule="evenodd" />
           </svg>
           <span>Vijay Nagar | 1.6 km away</span>
         </div>
 
         <div class="mt-3 flex flex-wrap items-center gap-2">
           <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">Open Now</span>
-          <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">Verified</span>
-          <span class="rounded-full bg-yellow-100 px-3 py-1 text-xs font-semibold text-yellow-800">Trusted</span>
+          <span
+            class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="m8.6 22.5l-1.9-3.2l-3.6-.8l.35-3.7L1 12l2.45-2.8l-.35-3.7l3.6-.8l1.9-3.2L12 2.95l3.4-1.45l1.9 3.2l3.6.8l-.35 3.7L23 12l-2.45 2.8l.35 3.7l-3.6.8l-1.9 3.2l-3.4-1.45zm2.35-6.95L16.6 9.9l-1.4-1.45l-4.25 4.25l-2.15-2.1L7.4 12z" />
+            </svg>
+            Verified</span>
+          <span
+            class="inline-flex items-center gap-1 rounded-full bg-gradient-to-b from-[#FFCF31] via-[#FFECAD] to-[#FFCF31] px-3 py-1 text-xs font-semibold text-[#7A5A00] shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="m8 12l3 3l5-7M4 11.252c0 7.687 6.918 10.387 7.887 10.728q.113.04.226 0C13.084 21.65 20 19.018 20 11.253V4.304a.4.4 0 0 0-.303-.389l-7.6-1.903a.4.4 0 0 0-.194 0l-7.6 1.903A.4.4 0 0 0 4 4.304z" />
+            </svg>
+            Trusted</span>
         </div>
       </div>
 
       <div class="flex w-full flex-row gap-3 md:w-auto">
-        <button class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow">
-          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path d="M2 3.5A1.5 1.5 0 0 1 3.5 2h2A1.5 1.5 0 0 1 7 3.5v1A1.5 1.5 0 0 1 5.5 6H5l.2 1.4a2 2 0 0 0 1.6 1.7l2.7.5a2 2 0 0 1 1.6 1.6l.5 2.7a2 2 0 0 0 1.7 1.6L14 15v-.5A1.5 1.5 0 0 1 15.5 13h1a1.5 1.5 0 0 1 1.5 1.5v2A1.5 1.5 0 0 1 16.5 18h-1C8.6 18 3 12.4 3 5.5v-1z" />
+        <button
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+            <path fill="currentColor"
+              d="M19.95 21q-3.125 0-6.175-1.362t-5.55-3.863t-3.862-5.55T3 4.05q0-.45.3-.75t.75-.3H8.1q.35 0 .625.238t.325.562l.65 3.5q.05.4-.025.675T9.4 8.45L6.975 10.9q.5.925 1.187 1.787t1.513 1.663q.775.775 1.625 1.438T13.1 17l2.35-2.35q.225-.225.588-.337t.712-.063l3.45.7q.35.1.575.363T21 15.9v4.05q0 .45-.3.75t-.75.3" />
           </svg>
           Call
         </button>
-        <button class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-primary shadow">
-          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path d="M3.3 10.3a1 1 0 0 1 0-1.4l11-11a1 1 0 0 1 1.7.6l.7 4.8a1 1 0 0 1-.6 1l-5.4 2.3 2.3 5.4a1 1 0 0 1-1 1.4l-4.8-.7a1 1 0 0 1-.6-1.7l11-11a1 1 0 0 1-1.4 0l-11 11z" />
+        <button
+          class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-primary shadow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 1792 1792">
+            <path fill="currentColor"
+              d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45q-14 8-31 8q-11 0-24-5l-453-185l-242 295q-18 23-49 23q-13 0-22-4q-19-7-30.5-23.5T640 1728v-349l864-1059l-1069 925l-395-162q-37-14-40-55q-2-40 32-59L1696 9q15-9 32-9q20 0 36 11" />
           </svg>
           Directions
         </button>
@@ -150,11 +171,9 @@
   <!-- Card 2 -->
   <div class="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
     <div class="flex flex-col gap-4 md:flex-row md:items-center">
-      <img
-        class="h-28 w-full shrink-0 rounded-xl object-cover md:h-32 md:w-48"
+      <img class="h-28 w-full shrink-0 rounded-xl object-cover md:h-32 md:w-48"
         src="https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=900&auto=format&fit=crop"
-        alt="Hidayah Mobile and accessories"
-      />
+        alt="Hidayah Mobile and accessories" />
 
       <div class="flex-1">
         <h3 class="text-lg font-semibold text-gray-900">Hidayah Mobile and accessories</h3>
@@ -162,28 +181,46 @@
 
         <div class="mt-2 flex items-center gap-2 text-sm text-gray-600">
           <svg class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M5.05 7.05a6.5 6.5 0 1 1 9.19 9.19L10 19.5l-4.24-3.26A6.48 6.48 0 0 1 5.05 7.05zm4.95 5.2a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z" clip-rule="evenodd" />
+            <path fill-rule="evenodd"
+              d="M5.05 7.05a6.5 6.5 0 1 1 9.19 9.19L10 19.5l-4.24-3.26A6.48 6.48 0 0 1 5.05 7.05zm4.95 5.2a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z"
+              clip-rule="evenodd" />
           </svg>
           <span>Vijay Nagar | 1.6 km away</span>
         </div>
 
         <div class="mt-3 flex flex-wrap items-center gap-2">
           <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">Open Now</span>
-          <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">Verified</span>
-          <span class="rounded-full bg-yellow-100 px-3 py-1 text-xs font-semibold text-yellow-800">Trusted</span>
+          <span
+            class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="m8.6 22.5l-1.9-3.2l-3.6-.8l.35-3.7L1 12l2.45-2.8l-.35-3.7l3.6-.8l1.9-3.2L12 2.95l3.4-1.45l1.9 3.2l3.6.8l-.35 3.7L23 12l-2.45 2.8l.35 3.7l-3.6.8l-1.9 3.2l-3.4-1.45zm2.35-6.95L16.6 9.9l-1.4-1.45l-4.25 4.25l-2.15-2.1L7.4 12z" />
+            </svg>
+            Verified</span>
+          <span
+            class="inline-flex items-center gap-1 rounded-full bg-gradient-to-b from-[#FFCF31] via-[#FFECAD] to-[#FFCF31] px-3 py-1 text-xs font-semibold text-[#7A5A00] shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="m8 12l3 3l5-7M4 11.252c0 7.687 6.918 10.387 7.887 10.728q.113.04.226 0C13.084 21.65 20 19.018 20 11.253V4.304a.4.4 0 0 0-.303-.389l-7.6-1.903a.4.4 0 0 0-.194 0l-7.6 1.903A.4.4 0 0 0 4 4.304z" />
+            </svg>
+            Trusted</span>
         </div>
       </div>
 
       <div class="flex w-full flex-row gap-3 md:w-auto">
-        <button class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow">
-          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path d="M2 3.5A1.5 1.5 0 0 1 3.5 2h2A1.5 1.5 0 0 1 7 3.5v1A1.5 1.5 0 0 1 5.5 6H5l.2 1.4a2 2 0 0 0 1.6 1.7l2.7.5a2 2 0 0 1 1.6 1.6l.5 2.7a2 2 0 0 0 1.7 1.6L14 15v-.5A1.5 1.5 0 0 1 15.5 13h1a1.5 1.5 0 0 1 1.5 1.5v2A1.5 1.5 0 0 1 16.5 18h-1C8.6 18 3 12.4 3 5.5v-1z" />
+        <button
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+            <path fill="currentColor"
+              d="M19.95 21q-3.125 0-6.175-1.362t-5.55-3.863t-3.862-5.55T3 4.05q0-.45.3-.75t.75-.3H8.1q.35 0 .625.238t.325.562l.65 3.5q.05.4-.025.675T9.4 8.45L6.975 10.9q.5.925 1.187 1.787t1.513 1.663q.775.775 1.625 1.438T13.1 17l2.35-2.35q.225-.225.588-.337t.712-.063l3.45.7q.35.1.575.363T21 15.9v4.05q0 .45-.3.75t-.75.3" />
           </svg>
           Call
         </button>
-        <button class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-primary shadow">
-          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path d="M3.3 10.3a1 1 0 0 1 0-1.4l11-11a1 1 0 0 1 1.7.6l.7 4.8a1 1 0 0 1-.6 1l-5.4 2.3 2.3 5.4a1 1 0 0 1-1 1.4l-4.8-.7a1 1 0 0 1-.6-1.7l11-11a1 1 0 0 1-1.4 0l-11 11z" />
+        <button
+          class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-primary shadow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 1792 1792">
+            <path fill="currentColor"
+              d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45q-14 8-31 8q-11 0-24-5l-453-185l-242 295q-18 23-49 23q-13 0-22-4q-19-7-30.5-23.5T640 1728v-349l864-1059l-1069 925l-395-162q-37-14-40-55q-2-40 32-59L1696 9q15-9 32-9q20 0 36 11" />
           </svg>
           Directions
         </button>
@@ -194,11 +231,9 @@
   <!-- Card 3 -->
   <div class="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
     <div class="flex flex-col gap-4 md:flex-row md:items-center">
-      <img
-        class="h-28 w-full shrink-0 rounded-xl object-cover md:h-32 md:w-48"
+      <img class="h-28 w-full shrink-0 rounded-xl object-cover md:h-32 md:w-48"
         src="https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=900&auto=format&fit=crop"
-        alt="Hidayah Mobile and accessories"
-      />
+        alt="Hidayah Mobile and accessories" />
 
       <div class="flex-1">
         <h3 class="text-lg font-semibold text-gray-900">Hidayah Mobile and accessories</h3>
@@ -206,28 +241,46 @@
 
         <div class="mt-2 flex items-center gap-2 text-sm text-gray-600">
           <svg class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M5.05 7.05a6.5 6.5 0 1 1 9.19 9.19L10 19.5l-4.24-3.26A6.48 6.48 0 0 1 5.05 7.05zm4.95 5.2a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z" clip-rule="evenodd" />
+            <path fill-rule="evenodd"
+              d="M5.05 7.05a6.5 6.5 0 1 1 9.19 9.19L10 19.5l-4.24-3.26A6.48 6.48 0 0 1 5.05 7.05zm4.95 5.2a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z"
+              clip-rule="evenodd" />
           </svg>
           <span>Vijay Nagar | 1.6 km away</span>
         </div>
 
         <div class="mt-3 flex flex-wrap items-center gap-2">
           <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">Open Now</span>
-          <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">Verified</span>
-          <span class="rounded-full bg-yellow-100 px-3 py-1 text-xs font-semibold text-yellow-800">Trusted</span>
+         <span
+            class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="m8.6 22.5l-1.9-3.2l-3.6-.8l.35-3.7L1 12l2.45-2.8l-.35-3.7l3.6-.8l1.9-3.2L12 2.95l3.4-1.45l1.9 3.2l3.6.8l-.35 3.7L23 12l-2.45 2.8l.35 3.7l-3.6.8l-1.9 3.2l-3.4-1.45zm2.35-6.95L16.6 9.9l-1.4-1.45l-4.25 4.25l-2.15-2.1L7.4 12z" />
+            </svg>
+            Verified</span>
+          <span
+            class="inline-flex items-center gap-1 rounded-full bg-gradient-to-b from-[#FFCF31] via-[#FFECAD] to-[#FFCF31] px-3 py-1 text-xs font-semibold text-[#7A5A00] shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="m8 12l3 3l5-7M4 11.252c0 7.687 6.918 10.387 7.887 10.728q.113.04.226 0C13.084 21.65 20 19.018 20 11.253V4.304a.4.4 0 0 0-.303-.389l-7.6-1.903a.4.4 0 0 0-.194 0l-7.6 1.903A.4.4 0 0 0 4 4.304z" />
+            </svg>
+            Trusted</span>
         </div>
       </div>
 
       <div class="flex w-full flex-row gap-3 md:w-auto">
-        <button class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow">
-          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path d="M2 3.5A1.5 1.5 0 0 1 3.5 2h2A1.5 1.5 0 0 1 7 3.5v1A1.5 1.5 0 0 1 5.5 6H5l.2 1.4a2 2 0 0 0 1.6 1.7l2.7.5a2 2 0 0 1 1.6 1.6l.5 2.7a2 2 0 0 0 1.7 1.6L14 15v-.5A1.5 1.5 0 0 1 15.5 13h1a1.5 1.5 0 0 1 1.5 1.5v2A1.5 1.5 0 0 1 16.5 18h-1C8.6 18 3 12.4 3 5.5v-1z" />
+        <button
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+            <path fill="currentColor"
+              d="M19.95 21q-3.125 0-6.175-1.362t-5.55-3.863t-3.862-5.55T3 4.05q0-.45.3-.75t.75-.3H8.1q.35 0 .625.238t.325.562l.65 3.5q.05.4-.025.675T9.4 8.45L6.975 10.9q.5.925 1.187 1.787t1.513 1.663q.775.775 1.625 1.438T13.1 17l2.35-2.35q.225-.225.588-.337t.712-.063l3.45.7q.35.1.575.363T21 15.9v4.05q0 .45-.3.75t-.75.3" />
           </svg>
           Call
         </button>
-        <button class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-primary shadow">
-          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path d="M3.3 10.3a1 1 0 0 1 0-1.4l11-11a1 1 0 0 1 1.7.6l.7 4.8a1 1 0 0 1-.6 1l-5.4 2.3 2.3 5.4a1 1 0 0 1-1 1.4l-4.8-.7a1 1 0 0 1-.6-1.7l11-11a1 1 0 0 1-1.4 0l-11 11z" />
+        <button
+          class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-primary shadow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 1792 1792">
+            <path fill="currentColor"
+              d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45q-14 8-31 8q-11 0-24-5l-453-185l-242 295q-18 23-49 23q-13 0-22-4q-19-7-30.5-23.5T640 1728v-349l864-1059l-1069 925l-395-162q-37-14-40-55q-2-40 32-59L1696 9q15-9 32-9q20 0 36 11" />
           </svg>
           Directions
         </button>
