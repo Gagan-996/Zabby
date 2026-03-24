@@ -37,9 +37,7 @@ body {
   /* background: var(--color-page); */
 }
 
-/* ================= COMPONENT CLASSES ================= */
-
-/* Buttons */
+/* Shared components */
 .btn-primary {
   @apply bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-light transition;
 }
@@ -53,27 +51,13 @@ body {
   @apply bg-white rounded-xl shadow-sm overflow-hidden;
 }
 
-/* Business card */
-.business-card {
-  @apply bg-white rounded-xl shadow hover:shadow-md transition overflow-hidden;
-}
-
-/* Category icon circle */
-.category-icon {
-  @apply flex items-center justify-center w-14 h-14 rounded-full bg-[#B7B7B7] border border-[#B7B7B7];
-}
-
-/* Section spacing */
 .section {
   @apply py-6 px-6 max-w-7xl mx-auto;
 }
 
-/* Search input */
 .search-input {
   @apply w-full focus:outline-none;
 }
-
-/* ================= PAGE LAYOUT ================= */
 
 .page {
   @apply text-slate-900;
@@ -105,125 +89,6 @@ body {
 
 .profile-avatar {
   @apply w-8 h-8 rounded-full object-cover;
-}
-
-.chev {
-  @apply text-slate-500;
-}
-
-/* ================= HERO ================= */
-
-.hero {
-  @apply relative overflow-hidden;
-}
-
-.hero-bg {
-  @apply absolute inset-0 bg-center bg-cover;
-  background-image: url("../public/img/hero_banner.webp");
-}
-
-.hero-overlay {
-  @apply absolute inset-0 bg-black/45;
-}
-
-.hero-content {
-  @apply relative py-12 text-white;
-}
-
-.hero-content h1 {
-  @apply text-4xl md:text-5xl leading-tight;
-}
-
-.hero-content p {
-  @apply mt-2 text-base text-[#A19C9C];
-}
-
-.chip-row {
-  @apply mt-6 flex flex-wrap gap-3;
-}
-
-.btn-chip.active {
-  @apply bg-blue-100 text-blue-700;
-}
-
-/* ================= SECTIONS ================= */
-
-.section-title {
-  @apply flex items-center justify-between mb-4;
-}
-
-.section-title h2 {
-  @apply text-lg font-semibold;
-}
-
-.view-all {
-  @apply text-sm text-blue-600 font-medium;
-}
-
-/* ================= CATEGORIES ================= */
-
-.category-row {
-  @apply grid grid-cols-3 sm:grid-cols-5 md:grid-cols-15 gap-4 text-center;
-}
-
-.category {
-  @apply flex flex-col items-center gap-2 text-sm;
-}
-
-.category-icon {
-  @apply flex items-center justify-center w-14 h-14 rounded-full bg-[#f4f4f4] text-slate-600 font-semibold;
-}
-
-/* ================= CAROUSEL ================= */
-
-.carousel {
-  @apply relative flex items-center gap-4;
-}
-
-.carousel-btn {
-  @apply w-10 h-10 rounded-full bg-white shadow flex items-center justify-center text-xl text-slate-600;
-}
-
-.carousel-track {
-  @apply grid grid-cols-1 md:grid-cols-3 gap-6 flex-1;
-}
-
-.service-card {
-  @apply relative rounded-2xl overflow-hidden shadow;
-}
-
-.service-card img {
-  @apply w-full h-40 object-cover;
-}
-
-.service-chip {
-  @apply absolute bottom-3 left-3 bg-white/90 text-sm px-3 py-1 rounded-full font-medium;
-}
-
-/* ================= BUSINESSES ================= */
-
-.business-row {
-  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4;
-}
-
-.business-card img {
-  @apply w-full h-32 object-cover;
-}
-
-.business-card h3 {
-  @apply font-semibold text-sm;
-}
-
-.business-card p {
-  @apply text-xs text-slate-500;
-}
-
-.distance {
-  @apply text-xs text-slate-500 mt-1;
-}
-
-.status-open {
-  @apply text-xs font-medium;
 }
 
 /* Smart image */
@@ -261,31 +126,6 @@ body {
     background-position: -200% 0;
   }
 }
-
-/* ================= CTA ================= */
-
-.cta {
-  @apply p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-6;
-}
-
-.cta h3 {
-  @apply text-lg font-semibold;
-}
-
-.cta p {
-  @apply text-sm text-slate-500 mt-1 mb-4;
-}
-
-.cta-list {
-  @apply text-sm text-slate-600 flex flex-wrap gap-4;
-}
-
-.cta-list li::before {
-  content: "*";
-  @apply text-green-600 mr-2;
-}
-
-/* ================= FOOTER ================= */
 
 .footer {
   @apply flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-sm text-slate-500;

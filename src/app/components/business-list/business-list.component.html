@@ -1,5 +1,5 @@
-﻿<!-- Banner -->
-<section class="mx-auto max-w-7xl px-4 sm:px-6">
+﻿<!-- Banner Ads -->
+<!-- <section class="mx-auto max-w-7xl px-4 sm:px-6">
   <div
     class="relative overflow-hidden rounded-2xl border border-[#E5E7EB] bg-gradient-to-r from-[#4F8A4B] via-[#5AA95A] to-[#3E7A3E] px-6 py-8 sm:px-10 sm:py-10">
     <div class="relative z-10 max-w-xl">
@@ -13,11 +13,11 @@
       class="pointer-events-none absolute right-0 top-0 h-full w-[48%] bg-[url('https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?q=80&w=1400&auto=format&fit=crop')] bg-cover bg-right opacity-90">
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- Title + Filters -->
 <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-8">
-  <h2 class="text-2xl font-bold text-gray-900">Electricians Near You</h2>
+  <h2 class="text-2xl font-bold text-gray-900">{{ categoryTitle }}</h2>
 
   <div class="mt-5 flex flex-wrap gap-3">
     <div class="relative">
@@ -25,7 +25,7 @@
         class="flex items-center gap-2 rounded-full border border-blue-300 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm"
         (click)="toggleDropdown('area', $event)">
         <span class="text-gray-500">Area:</span>
-        <span class="text-blue-700 font-medium">Vijay Nagar</span>
+        <span class="text-blue-700 font-medium">{{ areaLabel }}</span>
         <svg class="h-4 w-4 text-gray-400 transition-transform" [class.rotate-180]="openDropdown === 'area'"
           viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
           <path fill-rule="evenodd"
@@ -108,183 +108,83 @@
 
 <!-- Business List -->
 <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-8 mb-14 space-y-6">
-  <!-- Card 1 -->
-  <div class="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
-    <div class="flex flex-col gap-4 md:flex-row md:items-center">
-      <img class="h-28 w-full shrink-0 rounded-xl object-cover md:h-32 md:w-48"
-        src="https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=900&auto=format&fit=crop"
-        alt="Hidayah Mobile and accessories" />
-
-      <div class="flex-1">
-        <h3 class="text-lg font-semibold text-gray-900">Hidayah Mobile and accessories</h3>
-        <p class="mt-1 text-sm text-gray-500">Electronic and Appliance</p>
-
-        <div class="mt-2 flex items-center gap-2 text-sm text-gray-600">
-          <svg class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd"
-              d="M5.05 7.05a6.5 6.5 0 1 1 9.19 9.19L10 19.5l-4.24-3.26A6.48 6.48 0 0 1 5.05 7.05zm4.95 5.2a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z"
-              clip-rule="evenodd" />
-          </svg>
-          <span>Vijay Nagar | 1.6 km away</span>
+  <ng-container *ngIf="isLoading">
+    <div class="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm" *ngFor="let _ of skeletons">
+      <div class="flex flex-col gap-4 md:flex-row md:items-center">
+        <div class="h-28 w-full shrink-0 rounded-xl bg-slate-200 animate-pulse md:h-32 md:w-48"></div>
+        <div class="flex-1 space-y-3">
+          <div class="h-6 w-2/3 rounded bg-slate-200 animate-pulse"></div>
+          <div class="h-4 w-1/3 rounded bg-slate-200 animate-pulse"></div>
+          <div class="h-4 w-1/2 rounded bg-slate-200 animate-pulse"></div>
+          <div class="flex flex-wrap gap-2">
+            <div class="h-7 w-20 rounded-full bg-slate-200 animate-pulse"></div>
+            <div class="h-7 w-24 rounded-full bg-slate-200 animate-pulse"></div>
+          </div>
         </div>
-
-        <div class="mt-3 flex flex-wrap items-center gap-2">
-          <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">Open Now</span>
-          <span
-            class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
-              <path fill="currentColor"
-                d="m8.6 22.5l-1.9-3.2l-3.6-.8l.35-3.7L1 12l2.45-2.8l-.35-3.7l3.6-.8l1.9-3.2L12 2.95l3.4-1.45l1.9 3.2l3.6.8l-.35 3.7L23 12l-2.45 2.8l.35 3.7l-3.6.8l-1.9 3.2l-3.4-1.45zm2.35-6.95L16.6 9.9l-1.4-1.45l-4.25 4.25l-2.15-2.1L7.4 12z" />
-            </svg>
-            Verified</span>
-          <span
-            class="inline-flex items-center gap-1 rounded-full bg-gradient-to-b from-[#FFCF31] via-[#FFECAD] to-[#FFCF31] px-3 py-1 text-xs font-semibold text-[#7A5A00] shadow-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
-              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                d="m8 12l3 3l5-7M4 11.252c0 7.687 6.918 10.387 7.887 10.728q.113.04.226 0C13.084 21.65 20 19.018 20 11.253V4.304a.4.4 0 0 0-.303-.389l-7.6-1.903a.4.4 0 0 0-.194 0l-7.6 1.903A.4.4 0 0 0 4 4.304z" />
-            </svg>
-            Trusted</span>
+        <div class="flex w-full flex-row gap-3 md:w-auto">
+          <div class="h-11 flex-1 rounded-full bg-slate-200 animate-pulse md:w-28 md:flex-none"></div>
+          <div class="h-11 flex-1 rounded-full bg-slate-200 animate-pulse md:w-32 md:flex-none"></div>
         </div>
-      </div>
-
-      <div class="flex w-full flex-row gap-3 md:w-auto">
-        <button
-          class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
-            <path fill="currentColor"
-              d="M19.95 21q-3.125 0-6.175-1.362t-5.55-3.863t-3.862-5.55T3 4.05q0-.45.3-.75t.75-.3H8.1q.35 0 .625.238t.325.562l.65 3.5q.05.4-.025.675T9.4 8.45L6.975 10.9q.5.925 1.187 1.787t1.513 1.663q.775.775 1.625 1.438T13.1 17l2.35-2.35q.225-.225.588-.337t.712-.063l3.45.7q.35.1.575.363T21 15.9v4.05q0 .45-.3.75t-.75.3" />
-          </svg>
-          Call
-        </button>
-        <button
-          class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-primary shadow">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 1792 1792">
-            <path fill="currentColor"
-              d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45q-14 8-31 8q-11 0-24-5l-453-185l-242 295q-18 23-49 23q-13 0-22-4q-19-7-30.5-23.5T640 1728v-349l864-1059l-1069 925l-395-162q-37-14-40-55q-2-40 32-59L1696 9q15-9 32-9q20 0 36 11" />
-          </svg>
-          Directions
-        </button>
       </div>
     </div>
-  </div>
+  </ng-container>
 
-  <!-- Card 2 -->
-  <div class="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
-    <div class="flex flex-col gap-4 md:flex-row md:items-center">
-      <img class="h-28 w-full shrink-0 rounded-xl object-cover md:h-32 md:w-48"
-        src="https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=900&auto=format&fit=crop"
-        alt="Hidayah Mobile and accessories" />
-
-      <div class="flex-1">
-        <h3 class="text-lg font-semibold text-gray-900">Hidayah Mobile and accessories</h3>
-        <p class="mt-1 text-sm text-gray-500">Electronic and Appliance</p>
-
-        <div class="mt-2 flex items-center gap-2 text-sm text-gray-600">
-          <svg class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd"
-              d="M5.05 7.05a6.5 6.5 0 1 1 9.19 9.19L10 19.5l-4.24-3.26A6.48 6.48 0 0 1 5.05 7.05zm4.95 5.2a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z"
-              clip-rule="evenodd" />
-          </svg>
-          <span>Vijay Nagar | 1.6 km away</span>
+  <ng-container *ngIf="!isLoading && businesses.length">
+    <div class="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm" *ngFor="let business of businesses">
+      <div class="flex flex-col gap-4 md:flex-row md:items-center">
+        <div class="smart-image-shell h-28 w-full shrink-0 rounded-xl md:h-32 md:w-48">
+          <span class="smart-image-placeholder"></span>
+          <img class="smart-image-element rounded-xl object-cover"
+            [appSmartImage]="api.imageUrl + business.business_profile_image"
+            [alt]="business.business_name || 'Business image'" />
         </div>
 
-        <div class="mt-3 flex flex-wrap items-center gap-2">
-          <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">Open Now</span>
-          <span
-            class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
-              <path fill="currentColor"
-                d="m8.6 22.5l-1.9-3.2l-3.6-.8l.35-3.7L1 12l2.45-2.8l-.35-3.7l3.6-.8l1.9-3.2L12 2.95l3.4-1.45l1.9 3.2l3.6.8l-.35 3.7L23 12l-2.45 2.8l.35 3.7l-3.6.8l-1.9 3.2l-3.4-1.45zm2.35-6.95L16.6 9.9l-1.4-1.45l-4.25 4.25l-2.15-2.1L7.4 12z" />
-            </svg>
-            Verified</span>
-          <span
-            class="inline-flex items-center gap-1 rounded-full bg-gradient-to-b from-[#FFCF31] via-[#FFECAD] to-[#FFCF31] px-3 py-1 text-xs font-semibold text-[#7A5A00] shadow-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
-              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                d="m8 12l3 3l5-7M4 11.252c0 7.687 6.918 10.387 7.887 10.728q.113.04.226 0C13.084 21.65 20 19.018 20 11.253V4.304a.4.4 0 0 0-.303-.389l-7.6-1.903a.4.4 0 0 0-.194 0l-7.6 1.903A.4.4 0 0 0 4 4.304z" />
-            </svg>
-            Trusted</span>
-        </div>
-      </div>
+        <div class="flex-1">
+          <h3 class="text-lg font-semibold text-gray-900">{{ business.business_name }}</h3>
+          <p class="mt-1 text-sm text-gray-500">{{ business.category_display }}</p>
 
-      <div class="flex w-full flex-row gap-3 md:w-auto">
-        <button
-          class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
-            <path fill="currentColor"
-              d="M19.95 21q-3.125 0-6.175-1.362t-5.55-3.863t-3.862-5.55T3 4.05q0-.45.3-.75t.75-.3H8.1q.35 0 .625.238t.325.562l.65 3.5q.05.4-.025.675T9.4 8.45L6.975 10.9q.5.925 1.187 1.787t1.513 1.663q.775.775 1.625 1.438T13.1 17l2.35-2.35q.225-.225.588-.337t.712-.063l3.45.7q.35.1.575.363T21 15.9v4.05q0 .45-.3.75t-.75.3" />
-          </svg>
-          Call
-        </button>
-        <button
-          class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-primary shadow">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 1792 1792">
-            <path fill="currentColor"
-              d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45q-14 8-31 8q-11 0-24-5l-453-185l-242 295q-18 23-49 23q-13 0-22-4q-19-7-30.5-23.5T640 1728v-349l864-1059l-1069 925l-395-162q-37-14-40-55q-2-40 32-59L1696 9q15-9 32-9q20 0 36 11" />
-          </svg>
-          Directions
-        </button>
+          <div class="mt-2 flex items-center gap-2 text-sm text-gray-600">
+            <svg class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd"
+                d="M5.05 7.05a6.5 6.5 0 1 1 9.19 9.19L10 19.5l-4.24-3.26A6.48 6.48 0 0 1 5.05 7.05zm4.95 5.2a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z"
+                clip-rule="evenodd" />
+            </svg>
+            <span>{{ business.area_name || areaLabel }} | {{ business.distance_km || 0 }} km away</span>
+          </div>
+
+          <div class="mt-3 flex flex-wrap items-center gap-2">
+            <span class="rounded-full px-3 py-1 text-xs font-semibold"
+              [ngClass]="business.open_status?.toLowerCase() === 'closed'
+                ? 'bg-red-100 text-red-700'
+                : 'bg-green-100 text-green-700'">
+              {{ business.open_status || 'Open Now' }}
+            </span>
+            <span *ngIf="business.is_verified"
+              class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+              Verified
+            </span>
+          </div>
+        </div>
+
+        <div class="flex w-full flex-row gap-3 md:w-auto">
+          <a class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow"
+            [href]="business.phone ? 'tel:' + business.phone : null">
+            Call
+          </a>
+          <a class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-primary shadow"
+            [href]="business.latitude && business.longitude
+              ? 'https://www.google.com/maps?q=' + business.latitude + ',' + business.longitude
+              : null"
+            target="_blank" rel="noreferrer">
+            Directions
+          </a>
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 
-  <!-- Card 3 -->
-  <div class="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
-    <div class="flex flex-col gap-4 md:flex-row md:items-center">
-      <img class="h-28 w-full shrink-0 rounded-xl object-cover md:h-32 md:w-48"
-        src="https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=900&auto=format&fit=crop"
-        alt="Hidayah Mobile and accessories" />
-
-      <div class="flex-1">
-        <h3 class="text-lg font-semibold text-gray-900">Hidayah Mobile and accessories</h3>
-        <p class="mt-1 text-sm text-gray-500">Electronic and Appliance</p>
-
-        <div class="mt-2 flex items-center gap-2 text-sm text-gray-600">
-          <svg class="h-4 w-4 text-primary" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd"
-              d="M5.05 7.05a6.5 6.5 0 1 1 9.19 9.19L10 19.5l-4.24-3.26A6.48 6.48 0 0 1 5.05 7.05zm4.95 5.2a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z"
-              clip-rule="evenodd" />
-          </svg>
-          <span>Vijay Nagar | 1.6 km away</span>
-        </div>
-
-        <div class="mt-3 flex flex-wrap items-center gap-2">
-          <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">Open Now</span>
-         <span
-            class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
-              <path fill="currentColor"
-                d="m8.6 22.5l-1.9-3.2l-3.6-.8l.35-3.7L1 12l2.45-2.8l-.35-3.7l3.6-.8l1.9-3.2L12 2.95l3.4-1.45l1.9 3.2l3.6.8l-.35 3.7L23 12l-2.45 2.8l.35 3.7l-3.6.8l-1.9 3.2l-3.4-1.45zm2.35-6.95L16.6 9.9l-1.4-1.45l-4.25 4.25l-2.15-2.1L7.4 12z" />
-            </svg>
-            Verified</span>
-          <span
-            class="inline-flex items-center gap-1 rounded-full bg-gradient-to-b from-[#FFCF31] via-[#FFECAD] to-[#FFCF31] px-3 py-1 text-xs font-semibold text-[#7A5A00] shadow-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
-              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                d="m8 12l3 3l5-7M4 11.252c0 7.687 6.918 10.387 7.887 10.728q.113.04.226 0C13.084 21.65 20 19.018 20 11.253V4.304a.4.4 0 0 0-.303-.389l-7.6-1.903a.4.4 0 0 0-.194 0l-7.6 1.903A.4.4 0 0 0 4 4.304z" />
-            </svg>
-            Trusted</span>
-        </div>
-      </div>
-
-      <div class="flex w-full flex-row gap-3 md:w-auto">
-        <button
-          class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
-            <path fill="currentColor"
-              d="M19.95 21q-3.125 0-6.175-1.362t-5.55-3.863t-3.862-5.55T3 4.05q0-.45.3-.75t.75-.3H8.1q.35 0 .625.238t.325.562l.65 3.5q.05.4-.025.675T9.4 8.45L6.975 10.9q.5.925 1.187 1.787t1.513 1.663q.775.775 1.625 1.438T13.1 17l2.35-2.35q.225-.225.588-.337t.712-.063l3.45.7q.35.1.575.363T21 15.9v4.05q0 .45-.3.75t-.75.3" />
-          </svg>
-          Call
-        </button>
-        <button
-          class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-primary shadow">
-          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 1792 1792">
-            <path fill="currentColor"
-              d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45q-14 8-31 8q-11 0-24-5l-453-185l-242 295q-18 23-49 23q-13 0-22-4q-19-7-30.5-23.5T640 1728v-349l864-1059l-1069 925l-395-162q-37-14-40-55q-2-40 32-59L1696 9q15-9 32-9q20 0 36 11" />
-          </svg>
-          Directions
-        </button>
-      </div>
-    </div>
+  <div *ngIf="!isLoading && !businesses.length"
+    class="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-10 text-center text-slate-500">
+    No nearby businesses found for this category yet.
   </div>
 </section>

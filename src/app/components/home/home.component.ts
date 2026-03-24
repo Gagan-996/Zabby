@@ -1,5 +1,6 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { LocationService } from '../../services/location.service';
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private api: ApiService,
     private locationService: LocationService,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: object
   ) {
     this.imageBaseUrl = this.api.imageUrl;
@@ -44,6 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (res: any) => {
+         
           this.categories = res.data;
           if (!this.selectedCategory && Array.isArray(this.categories) && this.categories.length > 0) {
             this.selectedCategory = this.categories[0];
@@ -74,6 +77,40 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   selectCategory(category: any): void {
     this.selectedCategory = category;
+    const route = this.buildCategoryRoute(category);
+
+    if (!route) {
+      return;
+    }
+
+    this.router.navigateByUrl(`/${route}`, {
+      state: {
+        categorySlug: category?.slug ?? '',
+        endingWith: category?.ending_with ?? '',
+        categoryName: category?.name ?? ''
+      }
+    });
+  }
+
+  private buildCategoryRoute(category: any): string {
+    const slug = this.toRoutePart(category?.slug ?? category?.name);
+    const endingWith = this.toRoutePart(category?.ending_with);
+
+    if (!slug) {
+      return '';
+    }
+
+    return endingWith ? `${slug}-${endingWith}-near-me` : `${slug}-near-me`;
+  }
+
+  private toRoutePart(value: string | null | undefined): string {
+    return (value ?? '')
+      .toString()
+      .trim()
+      .toLowerCase()
+      .replace(/&/g, ' and ')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
   }
 
 loadNearbyBusinesses() {

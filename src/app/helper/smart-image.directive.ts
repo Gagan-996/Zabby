@@ -13,7 +13,8 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 
 @Directive({
-  selector: 'img[appSmartImage]'
+  selector: 'img[appSmartImage]',
+  standalone: true
 })
 export class SmartImageDirective implements OnInit, OnChanges {
   @Input() appSmartImage: string | null = null;

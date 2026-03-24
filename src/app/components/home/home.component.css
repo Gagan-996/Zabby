@@ -1,0 +1,123 @@
+@reference "tailwindcss";
+
+:host {
+  display: block;
+}
+
+.hero {
+  @apply relative overflow-hidden;
+}
+
+.hero-bg {
+  @apply absolute inset-0 bg-center bg-cover;
+  background-image: url("/img/street246470.webp");
+}
+
+.hero-overlay {
+  @apply absolute inset-0 bg-black/45;
+}
+
+.hero-content {
+  @apply relative py-12 text-white;
+}
+
+.hero-content h1 {
+  @apply text-4xl leading-tight md:text-5xl;
+}
+
+.hero-content p {
+  @apply mt-2 text-base text-[#A19C9C];
+}
+
+.chip-row {
+  @apply mt-6 flex flex-wrap gap-3;
+}
+
+.btn-chip.active {
+  @apply bg-blue-100 text-blue-700;
+}
+
+.section-title {
+  @apply mb-4 flex items-center justify-between;
+}
+
+.section-title h2 {
+  @apply text-lg font-semibold;
+}
+
+.view-all {
+  @apply text-sm font-medium text-blue-600;
+}
+
+.carousel {
+  @apply relative flex items-center gap-4;
+}
+
+.carousel-btn {
+  @apply flex h-10 w-10 items-center justify-center rounded-full bg-white text-xl text-slate-600 shadow;
+}
+
+.carousel-track {
+  @apply grid flex-1 grid-cols-1 gap-6 md:grid-cols-3;
+}
+
+.service-card {
+  @apply relative overflow-hidden rounded-2xl shadow;
+}
+
+.service-card img {
+  @apply h-40 w-full object-cover;
+}
+
+.service-chip {
+  @apply absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1 text-sm font-medium;
+}
+
+.business-row {
+  @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5;
+}
+
+.business-card {
+  @apply overflow-hidden rounded-xl bg-white shadow transition hover:shadow-md;
+}
+
+.business-card img {
+  @apply h-32 w-full object-cover;
+}
+
+.business-card h3 {
+  @apply text-sm font-semibold;
+}
+
+.business-card p {
+  @apply text-xs text-slate-500;
+}
+
+.distance {
+  @apply mt-1 text-xs text-slate-500;
+}
+
+.status-open {
+  @apply text-xs font-medium;
+}
+
+.cta {
+  @apply flex flex-col gap-6 p-6 md:flex-row md:items-center md:justify-between;
+}
+
+.cta h3 {
+  @apply text-lg font-semibold;
+}
+
+.cta p {
+  @apply mt-1 mb-4 text-sm text-slate-500;
+}
+
+.cta-list {
+  @apply flex flex-wrap gap-4 text-sm text-slate-600;
+}
+
+.cta-list li::before {
+  content: "*";
+  @apply mr-2 text-green-600;
+}
