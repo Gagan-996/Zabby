@@ -12,7 +12,12 @@ export class TransferStateService {
         const stateKey = makeStateKey<T>(key);
 
         if (this.transferState.hasKey(stateKey)) {
-            return this.transferState.get(stateKey, null as any);
+            const data = this.transferState.get(stateKey, null as any);
+
+            // 🔥 MOST IMPORTANT LINE
+            this.transferState.remove(stateKey);
+
+            return data;
         }
 
         return null;

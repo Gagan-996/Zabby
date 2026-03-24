@@ -21,38 +21,29 @@
     </div>
 
     <div class="flex flex-wrap gap-3" *ngIf="isCategoriesLoading">
-        <div
-            class="h-10 w-28 rounded-xl border border-slate-200 bg-slate-100 animate-pulse"
+        <div class="h-10 w-28 rounded-xl border border-slate-200 bg-slate-100 animate-pulse"
             *ngFor="let _ of categorySkeletons"></div>
     </div>
 
     <div class="flex flex-wrap gap-3" *ngIf="!isCategoriesLoading">
         <button type="button"
             class="group flex items-center gap-2 rounded-xl border bg-white px-4 py-2 text-sm font-medium shadow-[0_1px_0_rgba(15,23,42,0.04)] transition"
-            *ngFor="let category of visibleCategories"
-            (click)="selectCategory(category)"
-            [ngClass]="selectedCategory === category
+            *ngFor="let category of visibleCategories" (click)="selectCategory(category)" [ngClass]="selectedCategory === category
                 ? 'border-primary/70 text-primary ring-1 ring-primary/40'
                 : 'border-slate-200 text-slate-700 hover:border-primary/60 hover:text-primary'">
-            <span
-                class="relative grid h-8 w-8 place-items-center overflow-hidden rounded-lg border transition"
+            <span class="smart-image-shell relative grid h-8 w-8 place-items-center overflow-hidden rounded-lg border transition"
                 [ngClass]="selectedCategory === category
                     ? 'border-primary/50 bg-primary/5'
                     : 'border-slate-200 bg-slate-50 group-hover:border-primary/50 group-hover:bg-primary/5'">
-                <div class="absolute inset-0 animate-pulse bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200" *ngIf="!categoryImageLoaded[visibleCategories.indexOf(category)]">
-                    </div>
-                <img [src]="imageBaseUrl + category.image_path"
-                    [alt]="category.name"
-                    class="h-5 w-5 object-contain"
-                    (load)="onCategoryImageLoad(visibleCategories.indexOf(category))"
-                    (error)="onImageError(visibleCategories.indexOf(category), 'category')" />
+                <span class="smart-image-placeholder"></span>
+                <img [appSmartImage]="imageBaseUrl + category.image_path" [alt]="category.name"
+                    class="smart-image-element h-5 w-5 object-contain" />
             </span>
             <span class="whitespace-nowrap">{{ category.name }}</span>
         </button>
         <button type="button"
             class="group flex items-center gap-2 rounded-xl border border-primary/30 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-[0_1px_0_rgba(15,23,42,0.04)] transition hover:border-primary hover:text-primary"
-            *ngIf="categories?.length > 14"
-            (click)="toggleShowAll()">
+            *ngIf="categories?.length > 14" (click)="toggleShowAll()">
             <span
                 class="grid h-8 w-8 place-items-center rounded-lg border border-primary/40 bg-primary/5 text-base font-semibold text-primary transition group-hover:bg-primary/10">
                 {{ showAll ? '-' : '+' }}
@@ -96,11 +87,13 @@
     <div class="section-title">
         <h2>Near By Businesses</h2>
     </div>
-
     <div class="business-row">
-        <ng-container *ngIf="isBusinessLoading; else businessList">
+        <!-- 🔹 Skeleton -->
+        <ng-container *ngIf="isBusinessLoading">
+
             <div class="business-card" *ngFor="let _ of businessSkeletons">
                 <div class="h-40 w-full bg-slate-200 animate-pulse"></div>
+
                 <div class="p-4 space-y-2">
                     <div class="h-4 w-3/4 rounded bg-slate-200 animate-pulse"></div>
                     <div class="h-3 w-1/2 rounded bg-slate-200 animate-pulse"></div>
@@ -108,30 +101,40 @@
                     <div class="h-5 w-16 rounded bg-slate-200 animate-pulse"></div>
                 </div>
             </div>
+
         </ng-container>
-        <ng-template #businessList>
-            <div class="business-card" *ngFor="let business of nearByBusiness; let i = index">
-                <div class="relative">
-                    <div class="absolute inset-0 bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 animate-pulse"
-                        *ngIf="!businessImageLoaded[i]"></div>
-                    <img [src]="imageBaseUrl + business.business_profile_image"
-                        [alt]="business.business_name"
-                        class="relative"
-                        (load)="onBusinessImageLoad(i)"
-                        (error)="onImageError(i, 'business')" />
+
+        <!-- 🔹 Data -->
+        <ng-container *ngIf="!isBusinessLoading">
+
+            <div class="business-card" *ngFor="let business of nearByBusiness">
+
+                <div class="smart-image-shell relative">
+                    <span class="smart-image-placeholder"></span>
+                    <img [appSmartImage]="imageBaseUrl + business.business_profile_image" [alt]="business.business_name"
+                        class="smart-image-element" />
                 </div>
+
                 <div class="p-4">
-                    <h3>{{business.business_name}}</h3>
+                    <h3>{{ business.business_name }}</h3>
                     <p>Electronic and Appliance</p>
-                    <div class="distance">{{business.distance_km}} KM</div>
-                    <span class="status-open"
-                        [ngClass]="business.open_status?.toLowerCase() === 'closed' ? 'text-red-600' : 'text-green-600'">
-                        {{business.open_status}}
+
+                    <div class="distance">
+                        {{ business.distance_km }} KM
+                    </div>
+
+                    <span [ngClass]="business.open_status?.toLowerCase() === 'closed'
+              ? 'text-red-600'
+              : 'text-green-600'">
+                        {{ business.open_status }}
                     </span>
                 </div>
+
             </div>
-        </ng-template>
+
+        </ng-container>
     </div>
+
 </section>
 
 <!-- Popular Service -->

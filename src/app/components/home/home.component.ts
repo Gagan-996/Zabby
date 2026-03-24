@@ -1,74 +1,61 @@
-﻿import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiService } from '../../services/api.service';
-
+import { LocationService } from '../../services/location.service';
+import { SmartImageDirective } from '../../helper/smart-image.directive';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule, SmartImageDirective],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  isBrowser = false;
+
   categories: any;
-  nearByBusiness:any;
+  nearByBusiness: any[] = [];
   selectedCategory: any;
   showAll: boolean = false;
   isCategoriesLoading: boolean = true;
   isBusinessLoading: boolean = true;
   categorySkeletons = Array.from({ length: 8 });
   businessSkeletons = Array.from({ length: 4 });
-  categoryImageLoaded: boolean[] = [];
-  businessImageLoaded: boolean[] = [];
   imageBaseUrl: string = '';
   private destroy$ = new Subject<void>();
 
-  constructor(private api: ApiService) {
-    this.imageBaseUrl = this.api.imageUrl
+  constructor(
+    private api: ApiService,
+    private locationService: LocationService,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {
+    this.imageBaseUrl = this.api.imageUrl;
   }
 
+  
   ngOnInit(): void {
+  this.isBrowser = isPlatformBrowser(this.platformId);
+   if (this.isBrowser) {
+    this.loadNearbyBusinesses();
+  }
     this.api
       .get<unknown>('categories/get-featured', 'categories')
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (res:any) => {
-            this.categories = res.data
-            if (!this.selectedCategory && Array.isArray(this.categories) && this.categories.length > 0) {
-              this.selectedCategory = this.categories[0];
-            }
-            if (Array.isArray(this.categories)) {
-              this.categoryImageLoaded = this.categories.map(() => false);
-            }
-            this.isCategoriesLoading = false;
+        next: (res: any) => {
+          this.categories = res.data;
+          if (!this.selectedCategory && Array.isArray(this.categories) && this.categories.length > 0) {
+            this.selectedCategory = this.categories[0];
+          }
+          this.isCategoriesLoading = false;
         },
         error: () => {
-          // Keep defaults on error
           this.isCategoriesLoading = false;
         }
       });
-      this.getNearByBusiness()
-  }
 
-  getNearByBusiness(){
-        this.api
-      .get<unknown>(`businesses/nearby?lat=22.736664&lng=75.910713`, 'buisnesses')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (res:any) => {
-            this.nearByBusiness = res.data
-            console.log(this.nearByBusiness);
-            if (Array.isArray(this.nearByBusiness)) {
-              this.businessImageLoaded = this.nearByBusiness.map(() => false);
-            }
-            this.isBusinessLoading = false;
-        },
-        error: () => {
-          // Keep defaults on error
-          this.isBusinessLoading = false;
-        }
-      });
+    
   }
 
   ngOnDestroy(): void {
@@ -81,8 +68,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     return this.showAll ? list : list.slice(0, 14);
   }
 
-  
-
   toggleShowAll(): void {
     this.showAll = !this.showAll;
   }
@@ -91,19 +76,46 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.selectedCategory = category;
   }
 
-  onCategoryImageLoad(index: number): void {
-    this.categoryImageLoaded[index] = true;
-  }
+loadNearbyBusinesses() {
+  this.isBusinessLoading = true;
 
-  onBusinessImageLoad(index: number): void {
-    this.businessImageLoaded[index] = true;
-  }
+  this.locationService.getCurrentLocation()
+    .then((loc) => {
 
-  onImageError(index: number, type: 'category' | 'business'): void {
-    if (type === 'category') {
-      this.categoryImageLoaded[index] = true;
-    } else {
-      this.businessImageLoaded[index] = true;
-    }
-  }
+      const lat = loc?.lat;
+      const lng = loc?.lng;
+
+      if (lat && lng) {
+        this.callApi(lat, lng);
+      } else {
+        this.callApi(22.7196, 75.8577); // fallback (Indore)
+      }
+
+    })
+    .catch(() => {
+      this.callApi(22.7196, 75.8577); // fallback
+    });
+}
+
+ callApi(lat: number, lng: number) {
+  this.api
+    .get(`businesses/nearby?lat=${lat}&lng=${lng}`)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next: (res: any) => {
+        this.nearByBusiness = res?.success ? res.data : [];
+        this.isBusinessLoading = false;
+      },
+      error: () => {
+        this.nearByBusiness = [];
+        this.isBusinessLoading = false;
+      }
+    });
+}
+
+
+
+
+
+ 
 }
