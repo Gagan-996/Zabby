@@ -31,7 +31,8 @@
             *ngFor="let category of visibleCategories" (click)="selectCategory(category)" [ngClass]="selectedCategory === category
                 ? 'border-primary/70 text-primary ring-1 ring-primary/40'
                 : 'border-slate-200 text-slate-700 hover:border-primary/60 hover:text-primary'">
-            <span class="smart-image-shell relative grid h-8 w-8 place-items-center overflow-hidden rounded-lg border transition"
+            <span
+                class="smart-image-shell relative grid h-8 w-8 place-items-center overflow-hidden rounded-lg border transition"
                 [ngClass]="selectedCategory === category
                     ? 'border-primary/50 bg-primary/5'
                     : 'border-slate-200 bg-slate-50 group-hover:border-primary/50 group-hover:bg-primary/5'">
@@ -107,7 +108,8 @@
         <!-- 🔹 Data -->
         <ng-container *ngIf="!isBusinessLoading">
 
-            <div class="business-card" *ngFor="let business of nearByBusiness">
+            <div class="business-card" *ngFor="let business of nearByBusiness"
+                [routerLink]="['/business', business.slug]">
 
                 <div class="smart-image-shell relative">
                     <span class="smart-image-placeholder"></span>
@@ -129,6 +131,8 @@
                         {{ business.open_status }}
                     </span>
                 </div>
+
+
 
             </div>
 

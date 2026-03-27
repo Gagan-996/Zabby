@@ -37,7 +37,7 @@ export const routes: Routes = [
         loadComponent: () => import('./components/search-business/search-business.component').then(m => m.SearchBusinessComponent)
     },
     {
-        path: 'business-details',
+        path: 'business/:slug',
         loadComponent: () => import('./components/business-detail/business-detail.component').then(m => m.BusinessDetailComponent)
     },
     {

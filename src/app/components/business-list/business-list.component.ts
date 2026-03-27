@@ -40,6 +40,7 @@ export class BusinessListComponent implements OnInit {
 
     this.routeSlug = navigationState['categorySlug'] || '';
     this.endingWith = navigationState['endingWith'] || '';
+    const categoryName = navigationState['categoryName']
 
     if (!this.routeSlug && routePath) {
       const parsed = this.parseNearMePath(routePath);
@@ -47,12 +48,7 @@ export class BusinessListComponent implements OnInit {
       this.endingWith = parsed.endingWith;
     }
 
-    const label = navigationState['categoryName']
-      || this.buildCategoryLabel(this.routeSlug, this.endingWith);
-
-    if (label) {
-      this.categoryTitle = `${label} Near You`;
-    }
+    this.categoryTitle = `${categoryName} ${this.endingWith} Near Me`;
 
     if (this.isBrowser && this.routeSlug) {
       this.loadBusinesses();

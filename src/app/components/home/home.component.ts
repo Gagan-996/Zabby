@@ -1,6 +1,6 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { LocationService } from '../../services/location.service';
@@ -8,7 +8,7 @@ import { SmartImageDirective } from '../../helper/smart-image.directive';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, SmartImageDirective],
+  imports: [CommonModule, SmartImageDirective, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -93,7 +93,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   private buildCategoryRoute(category: any): string {
-    const slug = this.toRoutePart(category?.slug ?? category?.name);
+    const slug = this.toRoutePart(category?.slug);
     const endingWith = this.toRoutePart(category?.ending_with);
 
     if (!slug) {
