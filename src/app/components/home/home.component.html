@@ -17,40 +17,47 @@
 <section class="section">
     <div class="section-title">
         <h2>Business and service near you</h2>
-        <a class="view-all" href="#">View all</a>
+        <a class="view-all" [routerLink]="['/businesses']">View all</a>
     </div>
 
-    <div class="flex flex-wrap gap-3" *ngIf="isCategoriesLoading">
-        <div class="h-10 w-28 rounded-xl border border-slate-200 bg-slate-100 animate-pulse"
-            *ngFor="let _ of categorySkeletons"></div>
-    </div>
+    <div class="category-swiper-shell">
+        <swiper-container #categorySwiper class="category-swiper" slides-per-view="auto" space-between="12" grab-cursor="true"
+            free-mode="true" mousewheel-force-to-axis="true">
+            @for (category of categories; track category.slug) {
+            <swiper-slide class="category-slide">
+                <button type="button"
+                    class="group category-chip flex items-center gap-2 rounded-xl border bg-white px-4 py-2 text-sm font-medium shadow-[0_1px_0_rgba(15,23,42,0.04)] transition"
+                    (click)="selectCategory(category)" [ngClass]="selectedCategory === category
+                        ? 'border-primary/70 text-primary ring-1 ring-primary/40'
+                        : 'border-slate-200 text-slate-700 hover:border-primary/60 hover:text-primary'">
+                    <span
+                        class="smart-image-shell relative grid h-8 w-8 place-items-center overflow-hidden rounded-lg border transition"
+                        [ngClass]="selectedCategory === category
+                            ? 'border-primary/50 bg-primary/5'
+                            : 'border-slate-200 bg-slate-50 group-hover:border-primary/50 group-hover:bg-primary/5'">
+                        <span class="smart-image-placeholder"></span>
+                        <img [appSmartImage]="imageBaseUrl + category.image_path" [alt]="category.name"
+                            class="smart-image-element h-5 w-5 object-contain" />
+                    </span>
+                    <span class="whitespace-nowrap">{{ category.name }}</span>
+                </button>
+            </swiper-slide>
+            }
+        </swiper-container>
 
-    <div class="flex flex-wrap gap-3" *ngIf="!isCategoriesLoading">
-        <button type="button"
-            class="group flex items-center gap-2 rounded-xl border bg-white px-4 py-2 text-sm font-medium shadow-[0_1px_0_rgba(15,23,42,0.04)] transition"
-            *ngFor="let category of visibleCategories" (click)="selectCategory(category)" [ngClass]="selectedCategory === category
-                ? 'border-primary/70 text-primary ring-1 ring-primary/40'
-                : 'border-slate-200 text-slate-700 hover:border-primary/60 hover:text-primary'">
-            <span
-                class="smart-image-shell relative grid h-8 w-8 place-items-center overflow-hidden rounded-lg border transition"
-                [ngClass]="selectedCategory === category
-                    ? 'border-primary/50 bg-primary/5'
-                    : 'border-slate-200 bg-slate-50 group-hover:border-primary/50 group-hover:bg-primary/5'">
-                <span class="smart-image-placeholder"></span>
-                <img [appSmartImage]="imageBaseUrl + category.image_path" [alt]="category.name"
-                    class="smart-image-element h-5 w-5 object-contain" />
-            </span>
-            <span class="whitespace-nowrap">{{ category.name }}</span>
-        </button>
-        <button type="button"
-            class="group flex items-center gap-2 rounded-xl border border-primary/30 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-[0_1px_0_rgba(15,23,42,0.04)] transition hover:border-primary hover:text-primary"
-            *ngIf="categories?.length > 14" (click)="toggleShowAll()">
-            <span
-                class="grid h-8 w-8 place-items-center rounded-lg border border-primary/40 bg-primary/5 text-base font-semibold text-primary transition group-hover:bg-primary/10">
-                {{ showAll ? '-' : '+' }}
-            </span>
-            <span>{{ showAll ? 'Less' : 'More' }}</span>
-        </button>
+        <div class="category-scroll-hint">
+            <button
+                type="button"
+                class="category-scroll-hint__icon"
+                aria-label="Scroll categories"
+                (click)="scrollCategories()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                </svg>
+            </button>
+        </div>
     </div>
 </section>
 
@@ -88,57 +95,73 @@
     <div class="section-title">
         <h2>Near By Businesses</h2>
     </div>
-    <div class="business-row">
-        <!-- 🔹 Skeleton -->
-        <ng-container *ngIf="isBusinessLoading">
+    <div class="business-swiper-shell">
+        <swiper-container #nearbyBusinessSwiper class="business-swiper" slides-per-view="auto" space-between="16"
+            grab-cursor="true" free-mode="true" mousewheel-force-to-axis="true">
+            <!-- 🔹 Skeleton -->
+            @if (isBusinessLoading) {
+                @for (_ of businessSkeletons; track $index) {
+                <swiper-slide class="business-slide">
+                    <div class="business-card">
+                        <div class="h-40 w-full bg-slate-200 animate-pulse"></div>
 
-            <div class="business-card" *ngFor="let _ of businessSkeletons">
-                <div class="h-40 w-full bg-slate-200 animate-pulse"></div>
-
-                <div class="p-4 space-y-2">
-                    <div class="h-4 w-3/4 rounded bg-slate-200 animate-pulse"></div>
-                    <div class="h-3 w-1/2 rounded bg-slate-200 animate-pulse"></div>
-                    <div class="h-3 w-1/4 rounded bg-slate-200 animate-pulse"></div>
-                    <div class="h-5 w-16 rounded bg-slate-200 animate-pulse"></div>
-                </div>
-            </div>
-
-        </ng-container>
-
-        <!-- 🔹 Data -->
-        <ng-container *ngIf="!isBusinessLoading">
-
-            <div class="business-card" *ngFor="let business of nearByBusiness"
-                [routerLink]="['/business', business.slug]">
-
-                <div class="smart-image-shell relative">
-                    <span class="smart-image-placeholder"></span>
-                    <img [appSmartImage]="imageBaseUrl + business.business_profile_image" [alt]="business.business_name"
-                        class="smart-image-element" />
-                </div>
-
-                <div class="p-4">
-                    <h3>{{ business.business_name }}</h3>
-                    <p>Electronic and Appliance</p>
-
-                    <div class="distance">
-                        {{ business.distance_km }} KM
+                        <div class="p-4 space-y-2">
+                            <div class="h-4 w-3/4 rounded bg-slate-200 animate-pulse"></div>
+                            <div class="h-3 w-1/2 rounded bg-slate-200 animate-pulse"></div>
+                            <div class="h-3 w-1/4 rounded bg-slate-200 animate-pulse"></div>
+                            <div class="h-5 w-16 rounded bg-slate-200 animate-pulse"></div>
+                        </div>
                     </div>
+                </swiper-slide>
+                }
+            }
 
-                    <span [ngClass]="business.open_status?.toLowerCase() === 'closed'
-              ? 'text-red-600'
-              : 'text-green-600'">
-                        {{ business.open_status }}
-                    </span>
-                </div>
+            <!-- 🔹 Data -->
+            @if (!isBusinessLoading) {
+                @for (business of nearByBusiness; track business.slug) {
+                <swiper-slide class="business-slide">
+                    <div class="business-card" [routerLink]="['/business', business.slug]">
+                        <div class="smart-image-shell relative">
+                            <span class="smart-image-placeholder"></span>
+                            <img [appSmartImage]="imageBaseUrl + business.business_profile_image"
+                                [fallback]="'/img/business_placeolder.webp'" [alt]="business.business_name"
+                                class="smart-image-element" />
+                        </div>
 
+                        <div class="p-4">
+                            <h3>{{ business.business_name }}</h3>
+                            <p>Electronic and Appliance</p>
 
+                            <div class="distance">
+                                {{ business.distance_km }} KM
+                            </div>
 
-            </div>
+                            <span [ngClass]="business.open_status.toLowerCase() === 'closed'
+                  ? 'text-red-600'
+                  : 'text-green-600'">
+                                {{ business.open_status }}
+                            </span>
+                        </div>
+                    </div>
+                </swiper-slide>
+                }
+            }
+        </swiper-container>
 
-        </ng-container>
+        <div class="category-scroll-hint">
+            <button
+                type="button"
+                class="category-scroll-hint__icon"
+                aria-label="Scroll nearby businesses"
+                (click)="scrollNearbyBusinesses()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                </svg>
+            </button>
+        </div>
     </div>
-
 </section>
 
 <!-- Popular Service -->
@@ -147,12 +170,12 @@
         <h2>Popular Service</h2>
     </div>
     <div class="chip-row">
-        <button class="btn-chip border border-[#D3D3D3]">AC Repair</button>
-        <button class="btn-chip border border-[#D3D3D3]">Electrician</button>
-        <button class="btn-chip border border-[#D3D3D3] active">Plumber</button>
-        <button class="btn-chip border border-[#D3D3D3]">Electrician</button>
-        <button class="btn-chip border border-[#D3D3D3]">Electrician</button>
-        <button class="btn-chip border border-[#D3D3D3]">...</button>
+        @for (item of visibleServiceAgentsCategory; track item.slug) {
+            <button type="button" class="btn-chip border border-[#D3D3D3]" (click)="selectCategory(item)">{{ item.name }}</button>
+        }
+        @if (hasMoreServiceAgentsCategory) {
+        <button type="button" class="btn-chip border border-[#D3D3D3]" (click)="viewAllPopularServices()">...</button>
+        }
     </div>
 </section>
 

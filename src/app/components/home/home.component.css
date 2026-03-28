@@ -49,6 +49,35 @@
   @apply text-sm font-medium text-blue-600;
 }
 
+.category-swiper {
+  @apply block overflow-visible;
+}
+
+.category-swiper-shell {
+  @apply relative;
+}
+
+.category-slide {
+  width: auto;
+}
+
+.category-chip {
+  @apply w-auto;
+}
+
+.category-scroll-hint {
+  @apply absolute right-0 top-0 z-10 flex h-full items-center pl-6 pr-1;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.78) 45%, rgba(255, 255, 255, 0.96) 100%);
+}
+
+.category-scroll-hint__icon {
+  @apply flex h-8 w-8 items-center justify-center rounded-full border border-slate-200/80 bg-white/90 text-slate-400 shadow-[0_6px_18px_rgba(15,23,42,0.08)] backdrop-blur transition hover:border-slate-300 hover:text-slate-600;
+}
+
+.category-scroll-hint__icon svg {
+  @apply h-4 w-4;
+}
+
 .carousel {
   @apply relative flex items-center gap-4;
 }
@@ -75,6 +104,18 @@
 
 .business-row {
   @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5;
+}
+
+.business-swiper {
+  @apply block overflow-visible;
+}
+
+.business-swiper-shell {
+  @apply relative;
+}
+
+.business-slide {
+  width: min(280px, calc(100vw - 3rem));
 }
 
 .business-card {

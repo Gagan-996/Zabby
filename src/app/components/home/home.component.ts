@@ -1,29 +1,46 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { LocationService } from '../../services/location.service';
 import { SmartImageDirective } from '../../helper/smart-image.directive';
+import {
+  FeaturedCategoriesResponse,
+  FeaturedCategory,
+  HomeCategoryNavigationState,
+  NearbyBusiness,
+  NearbyBusinessesResponse
+} from '../../models/home.model';
 
 @Component({
   selector: 'app-home',
   imports: [CommonModule, SmartImageDirective, RouterLink],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  isBrowser = false;
+  private readonly popularServiceLimit = 5;
+  private readonly businessScrollDistance = 280;
 
-  categories: any;
-  nearByBusiness: any[] = [];
-  selectedCategory: any;
-  showAll: boolean = false;
-  isCategoriesLoading: boolean = true;
-  isBusinessLoading: boolean = true;
-  categorySkeletons = Array.from({ length: 8 });
+  @ViewChild('categorySwiper') categorySwiper?: ElementRef<HTMLElement & {
+    swiper?: { slideNext: () => void };
+    shadowRoot?: ShadowRoot;
+  }>;
+  @ViewChild('nearbyBusinessSwiper') nearbyBusinessSwiper?: ElementRef<HTMLElement & {
+    swiper?: { slideNext: () => void };
+    shadowRoot?: ShadowRoot;
+  }>;
+
+  isBrowser = false;
+  serviceAgentsCategory: FeaturedCategory[] = [];
+  categories: FeaturedCategory[] = [];
+  nearByBusiness: NearbyBusiness[] = [];
+  selectedCategory: FeaturedCategory | null = null;
+  isBusinessLoading = true;
   businessSkeletons = Array.from({ length: 4 });
-  imageBaseUrl: string = '';
+  imageBaseUrl = '';
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -37,26 +54,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   
   ngOnInit(): void {
+    this.getCategories();
   this.isBrowser = isPlatformBrowser(this.platformId);
    if (this.isBrowser) {
     this.loadNearbyBusinesses();
   }
-    this.api
-      .get<unknown>('categories/get-featured', 'categories')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (res: any) => {
-         
-          this.categories = res.data;
-          if (!this.selectedCategory && Array.isArray(this.categories) && this.categories.length > 0) {
-            this.selectedCategory = this.categories[0];
-          }
-          this.isCategoriesLoading = false;
-        },
-        error: () => {
-          this.isCategoriesLoading = false;
-        }
-      });
+   
 
     
   }
@@ -66,16 +69,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  get visibleCategories(): any[] {
-    const list = this.categories ?? [];
-    return this.showAll ? list : list.slice(0, 14);
-  }
-
-  toggleShowAll(): void {
-    this.showAll = !this.showAll;
-  }
-
-  selectCategory(category: any): void {
+  selectCategory(category: FeaturedCategory): void {
     this.selectedCategory = category;
     const route = this.buildCategoryRoute(category);
 
@@ -83,18 +77,20 @@ export class HomeComponent implements OnInit, OnDestroy {
       return;
     }
 
+    const navigationState: HomeCategoryNavigationState = {
+      categorySlug: category.slug,
+      endingWith: category.ending_with,
+      categoryName: category.name
+    };
+
     this.router.navigateByUrl(`/${route}`, {
-      state: {
-        categorySlug: category?.slug ?? '',
-        endingWith: category?.ending_with ?? '',
-        categoryName: category?.name ?? ''
-      }
+      state: navigationState
     });
   }
 
-  private buildCategoryRoute(category: any): string {
-    const slug = this.toRoutePart(category?.slug);
-    const endingWith = this.toRoutePart(category?.ending_with);
+  private buildCategoryRoute(category: FeaturedCategory): string {
+    const slug = this.toRoutePart(category.slug);
+    const endingWith = this.toRoutePart(category.ending_with);
 
     if (!slug) {
       return '';
@@ -113,46 +109,99 @@ export class HomeComponent implements OnInit, OnDestroy {
       .replace(/^-+|-+$/g, '');
   }
 
-loadNearbyBusinesses() {
-  this.isBusinessLoading = true;
+  scrollCategories(): void {
+    this.scrollSwiper(this.categorySwiper);
+  }
 
-  this.locationService.getCurrentLocation()
-    .then((loc) => {
+  scrollNearbyBusinesses(): void {
+    this.scrollSwiper(this.nearbyBusinessSwiper, this.businessScrollDistance);
+  }
 
-      const lat = loc?.lat;
-      const lng = loc?.lng;
+  get visibleServiceAgentsCategory(): FeaturedCategory[] {
+    return this.serviceAgentsCategory.slice(0, this.popularServiceLimit);
+  }
 
-      if (lat && lng) {
-        this.callApi(lat, lng);
-      } else {
-        this.callApi(22.7196, 75.8577); // fallback (Indore)
-      }
+  get hasMoreServiceAgentsCategory(): boolean {
+    return this.serviceAgentsCategory.length > this.popularServiceLimit;
+  }
 
-    })
-    .catch(() => {
-      this.callApi(22.7196, 75.8577); // fallback
-    });
+  viewAllPopularServices(): void {
+    this.router.navigate(['/businesses']);
+  }
+
+  private scrollSwiper(
+    swiperRef: ElementRef<HTMLElement & { swiper?: { slideNext: () => void }; shadowRoot?: ShadowRoot }> | undefined,
+    fallbackDistance = 180
+  ): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    const swiperHost = swiperRef?.nativeElement;
+    const swiperInstance = swiperHost?.swiper;
+
+    if (swiperInstance?.slideNext) {
+      swiperInstance.slideNext();
+      return;
+    }
+
+    const swiperContainer = swiperHost?.shadowRoot?.querySelector('.swiper') as HTMLElement | null;
+    if (swiperContainer) {
+      swiperContainer.scrollBy({ left: fallbackDistance, behavior: 'smooth' });
+    }
+  }
+
+  loadNearbyBusinesses(): void {
+    this.isBusinessLoading = true;
+
+    this.locationService.getCurrentLocation()
+      .then((loc) => {
+        const lat = loc?.lat;
+        const lng = loc?.lng;
+
+        if (lat && lng) {
+          this.callApi(lat, lng);
+        } else {
+          this.callApi(22.7196, 75.8577); // fallback (Indore)
+        }
+      })
+      .catch(() => {
+        this.callApi(22.7196, 75.8577); // fallback
+      });
+  }
+
+  callApi(lat: number, lng: number): void {
+    this.api
+      .get<NearbyBusinessesResponse>(`businesses/nearby?lat=${lat}&lng=${lng}`)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (res) => {
+          this.nearByBusiness = res.success ? res.data : [];
+          this.isBusinessLoading = false;
+        },
+        error: () => {
+          this.nearByBusiness = [];
+          this.isBusinessLoading = false;
+        }
+      });
+  }
+
+  getCategories(): void {
+    this.api
+      .get<FeaturedCategoriesResponse>('categories/get-featured', 'categories')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (res) => {
+          this.categories = res.success ? res.data : [];
+          this.serviceAgentsCategory = this.categories.filter((cat) => cat.category_kind === 'service_agent');
+          if (!this.selectedCategory && this.categories.length > 0) {
+            this.selectedCategory = this.categories[0];
+          }
+        }
+      });
+  }
 }
-
- callApi(lat: number, lng: number) {
-  this.api
-    .get(`businesses/nearby?lat=${lat}&lng=${lng}`)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next: (res: any) => {
-        this.nearByBusiness = res?.success ? res.data : [];
-        this.isBusinessLoading = false;
-      },
-      error: () => {
-        this.nearByBusiness = [];
-        this.isBusinessLoading = false;
-      }
-    });
-}
-
-
 
 
 
  
-}

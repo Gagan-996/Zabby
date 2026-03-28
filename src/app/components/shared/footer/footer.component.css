@@ -1,0 +1,8 @@
+.footer-links button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}

@@ -18,7 +18,7 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class SmartImageDirective implements OnInit, OnChanges {
   @Input() appSmartImage: string | null = null;
-  @Input() fallback: string | null = 'assets/fallback.png';
+  @Input() fallback: string | null = null;
 
   private readonly isBrowser: boolean;
   private hasFallbackApplied = false;
@@ -74,7 +74,7 @@ export class SmartImageDirective implements OnInit, OnChanges {
     const src = this.appSmartImage?.trim();
 
     if (!src) {
-      this.setState('error');
+      this.applyFallback();
       return;
     }
 
@@ -94,6 +94,18 @@ export class SmartImageDirective implements OnInit, OnChanges {
     if (img.complete && img.naturalWidth > 0) {
       this.onLoad();
     }
+  }
+
+  private applyFallback(): void {
+    if (this.hasFallbackApplied || !this.fallback) {
+      this.setState('error');
+      return;
+    }
+
+    this.hasFallbackApplied = true;
+    this.prepareImage();
+    this.setState('loading');
+    this.renderer.setAttribute(this.el.nativeElement, 'src', this.fallback);
   }
 
   private prepareImage(): void {

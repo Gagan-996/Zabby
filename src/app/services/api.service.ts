@@ -9,8 +9,8 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class ApiService {
 
-    // baseUrl = 'https://api.tradiverse.in/api/';
-    baseUrl = 'http://localhost:3000/api/';
+    baseUrl = 'https://api.tradiverse.in/api/';
+    // baseUrl = 'http://localhost:3000/api/';
     imageUrl = 'https://pub-dc43a3b1162c478daad951298078ab42.r2.dev/'
     private readonly platformLabel: 'browser' | 'server';
     constructor(

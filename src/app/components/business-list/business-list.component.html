@@ -33,13 +33,15 @@
             clip-rule="evenodd" />
         </svg>
       </button>
-      <div *ngIf="openDropdown === 'area'"
+      @if (openDropdown === 'area') {
+      <div
         class="absolute left-0 top-full z-10 mt-2 w-56 rounded-xl border border-gray-200 bg-white p-2 shadow-lg"
         (click)="$event.stopPropagation()">
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Vijay Nagar</button>
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Scheme 54</button>
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Palasia</button>
       </div>
+      }
     </div>
 
     <div class="relative">
@@ -54,12 +56,14 @@
             clip-rule="evenodd" />
         </svg>
       </button>
-      <div *ngIf="openDropdown === 'type'"
+      @if (openDropdown === 'type') {
+      <div
         class="absolute left-0 top-full z-10 mt-2 w-48 rounded-xl border border-gray-200 bg-white p-2 shadow-lg"
         (click)="$event.stopPropagation()">
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Wholesale</button>
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Retail</button>
       </div>
+      }
     </div>
 
     <div class="relative">
@@ -74,13 +78,15 @@
             clip-rule="evenodd" />
         </svg>
       </button>
-      <div *ngIf="openDropdown === 'open'"
+      @if (openDropdown === 'open') {
+      <div
         class="absolute left-0 top-full z-10 mt-2 w-44 rounded-xl border border-gray-200 bg-white p-2 shadow-lg"
         (click)="$event.stopPropagation()">
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Open Now</button>
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Open Today</button>
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">All</button>
       </div>
+      }
     </div>
 
     <div class="relative">
@@ -95,21 +101,24 @@
             clip-rule="evenodd" />
         </svg>
       </button>
-      <div *ngIf="openDropdown === 'verified'"
+      @if (openDropdown === 'verified') {
+      <div
         class="absolute left-0 top-full z-10 mt-2 w-44 rounded-xl border border-gray-200 bg-white p-2 shadow-lg"
         (click)="$event.stopPropagation()">
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Verified</button>
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">Trusted</button>
         <button class="w-full rounded-lg px-3 py-2 text-left text-sm hover:bg-gray-100">All</button>
       </div>
+      }
     </div>
   </div>
 </section>
 
 <!-- Business List -->
 <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-8 mb-14 space-y-6">
-  <ng-container *ngIf="isLoading">
-    <div class="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm" *ngFor="let _ of skeletons">
+  @if (isLoading) {
+    @for (_ of skeletons; track $index) {
+    <div class="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
       <div class="flex flex-col gap-4 md:flex-row md:items-center">
         <div class="h-28 w-full shrink-0 rounded-xl bg-slate-200 animate-pulse md:h-32 md:w-48"></div>
         <div class="flex-1 space-y-3">
@@ -127,15 +136,18 @@
         </div>
       </div>
     </div>
-  </ng-container>
+    }
+  }
 
-  <ng-container *ngIf="!isLoading && businesses.length">
-    <div class="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm" *ngFor="let business of businesses">
+  @if (!isLoading && businesses.length) {
+    @for (business of businesses; track business?.slug ?? business?.id ?? business?.business_name ?? $index) {
+    <div class="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
       <div class="flex flex-col gap-4 md:flex-row md:items-center">
         <div class="smart-image-shell h-28 w-full shrink-0 rounded-xl md:h-32 md:w-48">
           <span class="smart-image-placeholder"></span>
           <img class="smart-image-element rounded-xl object-cover"
             [appSmartImage]="api.imageUrl + business.business_profile_image"
+            [fallback]="'/img/business_placeolder.webp'"
             [alt]="business.business_name || 'Business image'" />
         </div>
 
@@ -159,10 +171,12 @@
                 : 'bg-green-100 text-green-700'">
               {{ business.open_status || 'Open Now' }}
             </span>
-            <span *ngIf="business.is_verified"
+            @if (business.is_verified) {
+            <span
               class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
               Verified
             </span>
+            }
           </div>
         </div>
 
@@ -181,10 +195,13 @@
         </div>
       </div>
     </div>
-  </ng-container>
+    }
+  }
 
-  <div *ngIf="!isLoading && !businesses.length"
+  @if (!isLoading && !businesses.length) {
+  <div
     class="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-10 text-center text-slate-500">
     No nearby businesses found for this category yet.
   </div>
+  }
 </section>
