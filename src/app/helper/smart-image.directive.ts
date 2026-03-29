@@ -19,6 +19,7 @@ import { isPlatformBrowser } from '@angular/common';
 export class SmartImageDirective implements OnInit, OnChanges {
   @Input() appSmartImage: string | null = null;
   @Input() fallback: string | null = null;
+  @Input() priority: boolean = false; // 🔥 new
 
   private readonly isBrowser: boolean;
   private hasFallbackApplied = false;
@@ -32,15 +33,23 @@ export class SmartImageDirective implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    const img = this.el.nativeElement;
+     const img = this.el.nativeElement;
 
-    if (!img.getAttribute('loading')) {
-      this.renderer.setAttribute(img, 'loading', 'lazy');
-    }
+  if (!img.getAttribute('loading')) {
+    this.renderer.setAttribute(
+      img,
+      'loading',
+      this.priority ? 'eager' : 'lazy'
+    );
+  }
 
-    if (!img.getAttribute('decoding')) {
-      this.renderer.setAttribute(img, 'decoding', 'async');
-    }
+  if (this.priority) {
+    this.renderer.setAttribute(img, 'fetchpriority', 'high');
+  }
+
+  if (!img.getAttribute('decoding')) {
+    this.renderer.setAttribute(img, 'decoding', 'async');
+  }
 
     this.applySource();
   }

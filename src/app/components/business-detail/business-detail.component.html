@@ -49,32 +49,65 @@
   @else {
   @if (businessDetail; as business) {
   <div class="space-y-8">
-    @if (hasGalleryImages) {
-    <div class="grid grid-cols-12 gap-1">
-      @for (image of galleryImages; track image; let index = $index) {
-      <div
-        class="smart-image-shell relative overflow-hidden rounded-2xl"
-        [ngClass]="{
-          'col-span-12 h-44 sm:h-52 lg:h-56 md:col-span-5': index < 2,
-          'col-span-12 h-44 sm:h-52 lg:h-[108px] md:col-span-2': index >= 2
-        }">
-        <span class="smart-image-placeholder"></span>
-        <img
-          [appSmartImage]="resolveImageUrl(image)"
-          [alt]="business.business_name"
-          class="smart-image-element h-full w-full object-cover" />
-      </div>
-      }
+@if (hasGalleryImages) {
+
+<div class="flex gap-2 w-full h-[380px] overflow-hidden rounded-2xl">
+
+  <!-- LEFT: 2 BIG IMAGES -->
+  <div class="w-2/3 flex gap-2 h-full">
+
+    <div class="flex-1 h-full relative overflow-hidden rounded-2xl">
+      <img
+        [appSmartImage]="resolveImageUrl(galleryImages[0])"
+        [priority]="true"
+        class="w-full h-full object-cover"
+      />
     </div>
+
+    <div class="flex-1 h-full relative overflow-hidden rounded-2xl">
+      <img
+        [appSmartImage]="resolveImageUrl(galleryImages[1])"
+        class="w-full h-full object-cover"
+      />
+    </div>
+
+  </div>
+
+  <!-- RIGHT: 4 GRID -->
+  <div class="w-1/3 grid grid-cols-2 grid-rows-2 gap-2 h-full">
+
+    @for (image of galleryImages.slice(2, 6); track image; let i = $index) {
+
+    <div class="relative overflow-hidden rounded-2xl">
+
+      <img
+        [appSmartImage]="resolveImageUrl(image)"
+        class="w-full h-full object-cover"
+      />
+
+      @if (i === 3 && galleryImages.length > 6) {
+        <div class="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white text-sm font-semibold">
+          +{{ galleryImages.length - 5 }}
+          <span class="text-xs opacity-80">More</span>
+        </div>
+      }
+
+    </div>
+
     }
+
+  </div>
+
+</div>
+
+}
 
     <div class="space-y-3">
       <h1 class="text-2xl font-bold text-gray-900">{{ business.business_name }}</h1>
       <p class="text-sm text-gray-500">{{ primaryCategoryLabel }}</p>
 
       <div class="flex flex-wrap items-center gap-3 text-sm">
-        <span
-          class="rounded-full px-3 py-1 text-xs font-semibold"
+        <span class="rounded-full px-3 py-1 text-xs font-semibold"
           [ngClass]="isOpen ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'">
           {{ business.open_status }}
         </span>
@@ -122,8 +155,7 @@
       </div>
 
       <div class="flex flex-wrap gap-3">
-        <a
-          class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white shadow"
+        <a class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white shadow"
           [href]="callLink">
           <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
             <path fill="currentColor"
@@ -131,19 +163,15 @@
           </svg>
           Call
         </a>
-        <a
-          class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-6 py-2.5 text-sm font-semibold text-primary shadow"
-          [href]="mapDirectionsUrl"
-          target="_blank"
-          rel="noopener noreferrer">
+        <a class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-6 py-2.5 text-sm font-semibold text-primary shadow"
+          [href]="mapDirectionsUrl" target="_blank" rel="noopener noreferrer">
           <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 1792 1792">
             <path fill="currentColor"
               d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45q-14 8-31 8q-11 0-24-5l-453-185l-242 295q-18 23-49 23q-13 0-22-4q-19-7-30.5-23.5T640 1728v-349l864-1059l-1069 925l-395-162q-37-14-40-55q-2-40 32-59L1696 9q15-9 32-9q20 0 36 11" />
           </svg>
           Directions
         </a>
-        <button
-          type="button"
+        <button type="button"
           class="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-6 py-2.5 text-sm font-semibold text-primary shadow">
           <svg xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em" viewBox="0 0 24 24">
             <path fill="currentColor"
@@ -159,8 +187,7 @@
       <h2 class="text-lg font-semibold text-gray-900">What they sell</h2>
       <div class="flex flex-wrap gap-2">
         @for (item of productNames; track trackByValue($index, item)) {
-        <span
-          class="rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs font-semibold text-gray-700">
+        <span class="rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs font-semibold text-gray-700">
           {{ item }}
         </span>
         }
@@ -187,11 +214,11 @@
     }
 
     <div class="border-t border-gray-200 pt-4 text-sm text-gray-500 space-y-3">
-      <p>This business listing is based on publicly available information. If you are the owner, you can claim this listing.</p>
+      <p>This business listing is based on publicly available information. If you are the owner, you can claim this
+        listing.</p>
       <div class="flex flex-wrap gap-3">
         <button class="rounded-full bg-primary px-6 py-2 text-sm font-semibold text-white">Claim this Business</button>
-        <button
-          class="rounded-full border border-gray-300 bg-white px-6 py-2 text-sm font-semibold text-gray-600">
+        <button class="rounded-full border border-gray-300 bg-white px-6 py-2 text-sm font-semibold text-gray-600">
           Report incorrect information
         </button>
       </div>
@@ -203,7 +230,8 @@
         @for (related of relatedBusinesses; track related.name + related.imageUrl) {
         <div class="rounded-2xl border border-gray-100 bg-white p-4 shadow-sm">
           <div class="flex flex-col gap-4 md:flex-row md:items-center">
-            <img class="h-24 w-full shrink-0 rounded-xl object-cover md:h-24 md:w-36" [src]="related.imageUrl" [alt]="related.name" />
+            <img class="h-24 w-full shrink-0 rounded-xl object-cover md:h-24 md:w-36" [src]="related.imageUrl"
+              [alt]="related.name" />
             <div class="flex-1">
               <h3 class="text-lg font-semibold text-gray-900">{{ related.name }}</h3>
               <p class="mt-1 text-sm text-gray-500">Electronic and Appliance</p>
